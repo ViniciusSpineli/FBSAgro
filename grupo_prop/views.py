@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from .models import GrupoPropriedade    # Importa o modelo (vamos criar já já)
 
+def login(request):
+    return render (request, 'login.html')
+
 def index(request):
     return render(request, 'index.html')
 

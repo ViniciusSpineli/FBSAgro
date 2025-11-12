@@ -50,7 +50,7 @@
       flex-direction:column; /* Layout vertical */
       gap:8px; /* Espaço entre itens */
       transition:width var(--transition) ease; /* Transição de largura */
-      box-shadow:2px 0 12px rgba(2,6,23,0.6); /* Sombra lateral */
+      /*box-shadow:2px 0 12px rgba(2,6,23,0.6); /* Sombra lateral */
       overflow:hidden; /* Esconde conteúdo que ultrapassar */
     }
 
@@ -95,6 +95,7 @@
       flex:1;          /* Ocupa espaço restante */
       overflow:auto;   /* Scroll se necessário */
       padding-right:6px; /* Espaço interno */
+      color: white
     }
 
     .menu-group{
@@ -112,7 +113,8 @@
       user-select:none; /* Não permite seleção de texto */
     }
 
-    .menu-item:hover{
+    .menu-item:hoverr{
+      color:white;
       background:rgba(255,255,255,0.02); /* Highlight ao passar mouse */
     }
 
@@ -145,11 +147,12 @@
       padding:8px;
       border-radius:6px;
       text-decoration:none;
-      color:black;
+      color:white;
       font-size:14px;
     }
 
     .submenu a:hover{
+      
       color:white;
       background:rgba(255,255,255,0.02);
     }
@@ -237,13 +240,17 @@
       <div class="menu-group">
         <!-- Item de menu "Início" -->
         <div class="menu-item" data-action="home" onclick="showScreen('home')">
-          <div class="label"><div class="icon">🏠</div><div class="text">Início</div></div>
+          <div class="label"><div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#FFFFFF"><path d="M225.39-185.39h155.76v-244.99h197.7v244.99h155.76v-381.92L480-759.23 225.39-567.44v382.05ZM180-140v-450l300-225.77L780-590v450H533.46v-245H426.54v245H180Zm300-332.62Z"/></svg>
+          </div><div class="text">Início</div></div>
           <div class="arrow">›</div>
         </div>
 
         <!-- Item de menu "Produtos" com submenu -->
         <div class="menu-item" id="m1-toggle" onclick="toggleSub('m1')">
-          <div class="label"><div class="icon">📁</div><div class="text">Cadastros</div></div>
+          <div class="label"><div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#FFFFFF"><path d="M247.77-372.23h346.15l45.39-45.38H247.77v45.38Zm0-173h213.31v-45.38H247.77v45.38ZM145.39-694.61V-266h342.3l-46 46H100v-520h760v147.08h-45.39v-101.69H145.39Zm743.07 210.76q4.61 4.44 4.61 11.35 0 6.91-4.61 11.35l-34.69 34.69-36.16-36.15 36.02-36.02q4.52-4.52 9.77-4.52 5.26 0 9.98 4.61l15.08 14.69Zm-355 342.31v-36.15l259.69-259.69 36.16 36.15-259.7 259.69h-36.15ZM145.39-694.61V-266v-428.61Z"/></svg>
+          </div><div class="text">Cadastros</div></div>
           <div class="arrow">›</div>
         </div>
         <div class="submenu" id="m1">
@@ -254,7 +261,9 @@
 
         <!-- Item de menu "Configurações" com submenu -->
         <div class="menu-item" id="m2-toggle" onclick="toggleSub('m2')">
-          <div class="label"><div class="icon">⚙️</div><div class="text">Configurações</div></div>
+          <div class="label"><div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#FFFFFF"><path d="m437.62-414.15 201.99-201.23-32.61-32-169.59 170-84.79-85-32.62 32 117.62 116.23ZM55.39-150.77v-45.39h849.22v45.39H55.39Zm102.3-100q-23.53 0-40.61-17.08T100-308.46v-444.61q0-23.53 17.08-40.62 17.08-17.08 40.61-17.08h644.62q23.53 0 40.61 17.08Q860-776.6 860-753.07v444.61q0 23.53-17.08 40.61t-40.61 17.08H157.69Zm0-45.38h644.62q4.61 0 8.46-3.85 3.84-3.85 3.84-8.46v-444.61q0-4.62-3.84-8.47-3.85-3.84-8.46-3.84H157.69q-4.61 0-8.46 3.84-3.84 3.85-3.84 8.47v444.61q0 4.61 3.84 8.46 3.85 3.85 8.46 3.85Zm-12.3 0v-469.23 469.23Z"/></svg>
+          </div><div class="text">Movimentação</div></div>
           <div class="arrow">›</div>
         </div>
         <div class="submenu" id="m2">
@@ -264,7 +273,9 @@
 
         <!-- Item de menu "Relatórios" -->
         <div class="menu-item" onclick="showScreen('reports')">
-          <div class="label"><div class="icon">📊</div><div class="text">Relatórios</div></div>
+          <div class="label"><div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#FFFFFF"><path d="M330-497.31v-45.38h300v45.38H330Zm0-160v-45.38h300v45.38H330ZM225.39-382.69H540q24.83 0 45.91 11.04 21.09 11.04 36.32 30.27L734.61-195v-607.31q0-5.38-3.46-8.84t-8.84-3.46H237.69q-5.38 0-8.84 3.46t-3.46 8.84v419.62Zm12.3 237.3H715L586.39-313.62q-8.34-11.03-20.5-17.36-12.15-6.33-25.89-6.33H225.39v179.62q0 5.38 3.46 8.84t8.84 3.46ZM722.31-100H237.69q-23.53 0-40.61-17.08T180-157.69v-644.62q0-23.53 17.08-40.61T237.69-860h484.62q23.53 0 40.61 17.08T780-802.31v644.62q0 23.53-17.08 40.61T722.31-100Zm-496.92-45.39v-669.22 669.22Zm0-191.92v-45.38 45.38Z"/></svg>
+          </div><div class="text">Relatórios</div></div>
           <div class="arrow">›</div>
         </div>
       </div>
@@ -272,7 +283,7 @@
 
     <!-- Botão para recolher/expandir sidebar -->
     <div style="margin-top:auto;padding:6px">
-      <button class="toggle-btn" id="collapseBtn" onclick="toggleSidebar()">⇄</button>
+      <button class="toggle-btn" id="collapseBtn" onclick="toggleSidebar()"></button>
     </div>
   </aside>
 
@@ -280,7 +291,9 @@
   <main class="main">
     <div class="topbar">
       <!-- Botão de toggle da sidebar no topo -->
-      <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+      <button class="toggle-btn" onclick="toggleSidebar()">
+        <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#000000"><path d="M140-254.62V-300h680v45.38H140Zm0-202.69v-45.38h680v45.38H140ZM140-660v-45.38h680V-660H140Z"/></svg>
+      </button>
       <!-- Título da tela atual -->
       <h2 id="screen-title">Início</h2>
     </div>
