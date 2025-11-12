@@ -1,3 +1,5 @@
+{% load static %}
+
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -5,6 +7,8 @@
   <meta charset="utf-8" />
   <!-- Faz a página responsiva em dispositivos móveis -->
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="{% static 'midias/fbs_2017.ico' %}">
+
   <!-- Título da aba do navegador -->
   <title>FBS Agro</title>
 
@@ -39,8 +43,8 @@
     /* Sidebar principal */
     .sidebar{
       width:var(--sidebar-expanded-width); /* Largura padrão */
-      background:linear-gradient(90deg,#09d82b 95%, rgb(228, 228, 228) 0%); /* Fundo gradiente */
-      /*background-color: #09d82b;*/
+      /*background:linear-gradient(90deg,rgb(19, 228, 19) 95%, rgb(228, 228, 228) 0%); /* Fundo gradiente */
+      background-color: #09d82b;
       padding:12px; /* Espaçamento interno   */
       display:flex; 
       flex-direction:column; /* Layout vertical */
@@ -64,14 +68,21 @@
     }
 
     .brand .logo{
-      width:36px;
-      height:36px;
+      width:200px;
+      height:200px;
       border-radius:8px; /* Bordas arredondadas */
-      background:linear-gradient(135deg,var(--accent),#06b6d4); /* Gradiente */
+      /*background:linear-gradient(135deg,var(--accent),rgb(19, 228, 19)); /* Gradiente */
       display:flex;
       align-items:center;
       justify-content:center;
       font-weight:700;
+    }
+
+    .brand .logo img{
+      width: 100%;
+      height: 100%;
+      border-radius:5px;
+      object-fit: contain;
     }
 
     .brand h1{
@@ -216,8 +227,9 @@
   <aside class="sidebar" id="sidebar">
     <!-- Logotipo e marca -->
     <div class="brand">
-      <div class="logo">VS</div>
-      <h1>FBS AGRO</h1>
+      <div class="logo">
+        <img src="{% static 'fbs_2017.ico' %}" alt="logo">
+      </div>
     </div>
 
     <!-- Menu de navegação -->
@@ -231,12 +243,12 @@
 
         <!-- Item de menu "Produtos" com submenu -->
         <div class="menu-item" id="m1-toggle" onclick="toggleSub('m1')">
-          <div class="label"><div class="icon">📁</div><div class="text">Produtos</div></div>
+          <div class="label"><div class="icon">📁</div><div class="text">Cadastros</div></div>
           <div class="arrow">›</div>
         </div>
         <div class="submenu" id="m1">
-          <a href="#" onclick="showScreen('prod-list');return false">Lista de produtos</a>
-          <a href="#" onclick="showScreen('prod-create');return false">Criar produto</a>
+          <a href="#" onclick="showScreen('prod-list');return false">Grupo de Propriedade</a>
+          <a href="#" onclick="showScreen('prod-create');return false">Propriedade</a>
           <a href="#" onclick="showScreen('prod-cats');return false">Categorias</a>
         </div>
 
@@ -313,7 +325,7 @@
 
       // Tela especial: Lista de produtos via Django
       if (name === 'prod-list') {
-        title.textContent = 'Produtos — Lista';
+        title.textContent = 'Grupo de Propriedade';
         fetch('/produtos/')
           .then(response => response.text())
           .then(html => {
