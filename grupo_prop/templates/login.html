@@ -33,7 +33,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      
     }
 
     .logo img {
@@ -41,15 +40,10 @@
       margin-bottom: 10px;
     }
 
-    h2 {
-      font-size: 28px;
-      font-weight: bold;
-      margin-bottom: 40px;
-    }
-
     .form-group {
       text-align: left;
       margin-bottom: 20px;
+      position: relative;
     }
 
     label {
@@ -102,32 +96,28 @@
       background-color: #005fc0;
     }
 
-    a {
-      display: block;
-      margin-top: 20px;
-      color: #cce5ff;
-      text-decoration: none;
-      font-size: 14px;
-    }
-
-    a:hover {
-      text-decoration: underline;
+    .error-message {
+      color: #ffcccc;
+      background-color: rgba(255, 0, 0, 0.2);
+      border: 1px solid red;
+      padding: 8px;
+      border-radius: 6px;
+      font-size: 13px;
+      margin-top: 6px;
+      display: none;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="logo">
-      <!-- Substitua o src pelo caminho da sua logo -->
       <img src="{% static 'logo FBS AGRO.png' %}" alt="FBS Agro Logo">
-      <!--
-      <h2>Acesse sua conta</h2>
-      -->
     </div>
 
     <div class="form-group">
       <label for="usuario">Usuário</label>
       <input type="text" id="usuario" placeholder="Digite seu usuário" />
+      <div id="erroUsuario" class="error-message"></div>
     </div>
 
     <div class="form-group">
@@ -136,12 +126,10 @@
         <input type="password" id="senha" placeholder="Digite sua senha" />
         <button class="toggle-password" type="button" onclick="togglePassword()">👁️</button>
       </div>
+      <div id="erroSenha" class="error-message"></div>
     </div>
 
-    <button class="login-btn">Login</button>
-    <!--
-    <a href="#">Esqueci minha senha</a>
-    -->
+    <button class="login-btn" onclick="validarLogin()">Login</button>
   </div>
 
   <script>
@@ -149,6 +137,45 @@
       const senhaInput = document.getElementById("senha");
       senhaInput.type = senhaInput.type === "password" ? "text" : "password";
     }
+
+    function validarLogin() {
+      const usuario = document.getElementById("usuario");
+      const senha = document.getElementById("senha");
+      const erroUsuario = document.getElementById("erroUsuario");
+      const erroSenha = document.getElementById("erroSenha");
+
+      let valido = true;
+
+      // Limpa mensagens antigas
+      erroUsuario.style.display = "none";
+      erroSenha.style.display = "none";
+
+      if (usuario.value.trim() === "") {
+        erroUsuario.innerText = "O campo usuário precisa ser preenchido.";
+        erroUsuario.style.display = "block";
+        valido = false;
+      }
+
+      if (senha.value.trim() === "") {
+        erroSenha.innerText = "O campo senha precisa ser preenchido.";
+        erroSenha.style.display = "block";
+        valido = false;
+      }
+
+      if (valido) {
+        // tudo certo → redireciona
+        window.location.href = "{% url 'inicio' %}";
+      }
+    }
+
+    // Remove erro ao digitar novamente
+    document.getElementById("usuario").addEventListener("input", () => {
+      document.getElementById("erroUsuario").style.display = "none";
+    });
+
+    document.getElementById("senha").addEventListener("input", () => {
+      document.getElementById("erroSenha").style.display = "none";
+    });
   </script>
 </body>
 </html>

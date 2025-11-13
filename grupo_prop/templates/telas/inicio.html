@@ -3,75 +3,62 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <!-- Define codificação de caracteres -->
   <meta charset="utf-8" />
-  <!-- Faz a página responsiva em dispositivos móveis -->
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <link rel="icon" type="image/x-icon" href="{% static 'midias/fbs_2017.ico' %}">
-
-  <!-- Título da aba do navegador -->
   <title>FBS Agro</title>
 
   <style>
-    /* Variáveis globais para cores, tamanhos e transições */
     :root{
-      --sidebar-collapsed-width:60px;  /* Largura da sidebar quando recolhida */
-      --sidebar-expanded-width:240px;  /* Largura da sidebar quando expandida */
-      --transition:0.28s;              /* Tempo de transição de animações */
-      --bg:#0f172a;                     /* Cor de fundo principal */
-      --panel:#0b1220;                  /* Cor de fundo de painéis */
-      --accent:#4f46e5;                 /* Cor de destaque */
-      --muted:#9aa4b2;                  /* Cor de textos secundários */
+      --sidebar-collapsed-width:60px;
+      --sidebar-expanded-width:240px;
+      --transition:0.28s;
+      --bg:#0f172a;
+      --panel:#0b1220;
+      --accent:#4f46e5;
+      --muted:#9aa4b2;
     }
 
-    /* Reset básico e fonte padrão */
     *{
       box-sizing:border-box;
       font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, 'Helvetica Neue', Arial;
     }
 
-    /* Estilos do body - Aki fica a estilização do corpo da nossa aplicacação! */
     body{
-      margin:0;  /* Remove margens padrão */
-      background:linear-gradient(180deg,#ffffff 100%, #071427 0%); /* Fundo gradiente */
-      /*background-color: #ffffff;*/
-      color:#0b1220; /* Cor do texto */
-      height:100vh; /* Altura total da tela */
-      display:flex; /* Layout flex para sidebar + main */
+      margin:0;
+      background:linear-gradient(180deg,#ffffff 100%, #071427 0%);
+      color:#0b1220;
+      height:100vh;
+      display:flex;
     }
 
-    /* Sidebar principal */
     .sidebar{
-      width:var(--sidebar-expanded-width); /* Largura padrão */
-      /*background:linear-gradient(90deg,rgb(19, 228, 19) 95%, rgb(228, 228, 228) 0%); /* Fundo gradiente */
+      width:var(--sidebar-expanded-width);
       background-color: #189117;
-      padding:12px; /* Espaçamento interno   */
+      padding:12px;
       display:flex; 
-      flex-direction:column; /* Layout vertical */
-      gap:8px; /* Espaço entre itens */
-      transition:width var(--transition) ease; /* Transição de largura */
-      /*box-shadow:2px 0 12px rgba(2,6,23,0.6); /* Sombra lateral */
-      overflow:hidden; /* Esconde conteúdo que ultrapassar */
+      flex-direction:column;
+      gap:8px;
+      transition:width var(--transition) ease;
+      overflow:hidden;
+      color: white;
     }
 
-    /* Sidebar recolhida */
     .sidebar.collapsed{
       width:var(--sidebar-collapsed-width);
     }
 
-    /* Área de marca/logotipo */
     .brand{
       display:flex;
-      align-items:center; /* Centraliza verticalmente */
-      gap:10px; /* Espaço entre logo e texto */
-      padding:8px 6px; /* Espaçamento interno */
+      align-items:center;
+      gap:10px;
+      padding:8px 6px;
     }
 
     .brand .logo{
       width:90%;
       height:200px;
-      border-radius:8px; /* Bordas arredondadas */
-      /*background:linear-gradient(135deg,var(--accent),rgb(19, 228, 19)); /* Gradiente */
+      border-radius:8px;
       display:flex;
       align-items:center;
       justify-content:center;
@@ -85,43 +72,30 @@
       object-fit: contain;
     }
 
-    .brand h1{
-      font-size:14px; /* Tamanho do texto */
-      margin:0;       /* Remove margem */
-    }
-
-    /* Menu principal da sidebar */
     .menu{
-      flex:1;          /* Ocupa espaço restante */
-      overflow:auto;   /* Scroll se necessário */
-      padding-right:6px; /* Espaço interno */
-      color: white
+      flex:1;
+      overflow:auto;
+      padding-right:6px;
     }
 
-    .menu-group{
-      margin-top:6px; /* Espaço entre grupos de menu */
-    }
-
-    /* Item de menu */
     .menu-item{
       display:flex;
       align-items:center;
-      justify-content:space-between; /* Separação entre label e arrow */
+      justify-content:space-between;
       padding:10px;
       border-radius:8px;
-      cursor:pointer;  /* Cursor de mãozinha */
-      user-select:none; /* Não permite seleção de texto */
+      cursor:pointer;
+      user-select:none;
     }
 
-    .menu-item:hoverr{
-      color:white;
-      background:rgba(255,255,255,0.02); /* Highlight ao passar mouse */
+    .menu-item:hover{
+      background:rgba(255,255,255,0.1);
     }
 
     .menu-item .label{
       display:flex;
       align-items:center;
-      gap:10px; /* Espaço entre ícone e texto */
+      gap:10px;
     }
 
     .menu-item .icon{
@@ -131,14 +105,13 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      background:rgba(255,255,255,0.03); /* Fundo sutil */
+      background:rgba(255,255,255,0.1);
     }
 
-    /* Submenus (itens dentro de menu-item) */
     .submenu{
       margin-top:6px;
-      padding-left:44px; /* Indenta submenu */
-      display:none; /* Inicialmente escondido */
+      padding-left:44px;
+      display:none;
       flex-direction:column;
       gap:6px;
     }
@@ -152,29 +125,23 @@
     }
 
     .submenu a:hover{
-      
-      color:white;
-      background:rgba(255,255,255,0.02);
+      background:rgba(255,255,255,0.1);
     }
 
-    /* Seta/arrow de menu */
     .arrow{
       transition:transform var(--transition) ease;
     }
 
-    /* Gira arrow quando menu aberto */
     .menu-item.open .arrow{
       transform:rotate(90deg);
     }
 
-    /* Área principal de conteúdo */
     .main{
       flex:1;
       padding:18px;
       overflow:auto;
     }
 
-    /* Cartões de conteúdo */
     .card{
       background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
       padding:18px;
@@ -182,15 +149,19 @@
       box-shadow:0 6px 20px rgba(2,6,23,0.6);
     }
 
-    /* Barra superior */
     .topbar{
       display:flex;
       align-items:center;
+      justify-content:space-between; /* <-- para alinhar usuário à direita */
       gap:12px;
       margin-bottom:12px;
     }
 
-    /* Botão de toggle da sidebar */
+    .topbar .user-info{
+      font-weight:600;
+      color:#000;
+    }
+
     .toggle-btn{
       background:transparent;
       border:1px solid rgba(255,255,255,0.04);
@@ -199,7 +170,6 @@
       cursor:pointer;
     }
 
-    /* Responsividade */
     @media (max-width:800px){
       .sidebar{
         position:absolute;
@@ -211,7 +181,6 @@
       body{padding-left:0;}
     }
 
-    /* Ajustes quando sidebar recolhida */
     .sidebar.collapsed .brand h1, 
     .sidebar.collapsed .menu-item .text, 
     .sidebar.collapsed .submenu{
@@ -219,34 +188,48 @@
     }
 
     .sidebar.collapsed .menu-item {
-      justify-content:center; /* Centraliza ícone */
+      justify-content:center;
+    }
+
+    .logout-btn {
+      background: #ffffff;
+      color: #189117;
+      border: none;
+      border-radius: 8px;
+      padding: 10px;
+      width: 100%;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s ease;
+    }
+
+    .logout-btn:hover {
+      background: #d1ffd1;
     }
 
   </style>
 </head>
 
 <body>
-  <!-- Sidebar lateral -->
   <aside class="sidebar" id="sidebar">
-    <!-- Logotipo e marca -->
     <div class="brand">
       <div class="logo">
         <img src="{% static 'logo FBS AGRO.png' %}" alt="logo">
       </div>
     </div>
 
-    <!-- Menu de navegação -->
-    <nav class="menu" role="navigation" aria-label="Menu principal">
+    <nav class="menu">
       <div class="menu-group">
-        <!-- Item de menu "Início" -->
-        <div class="menu-item" data-action="home" onclick="showScreen('home')">
-          <div class="label"><div class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#FFFFFF"><path d="M225.39-185.39h155.76v-244.99h197.7v244.99h155.76v-381.92L480-759.23 225.39-567.44v382.05ZM180-140v-450l300-225.77L780-590v450H533.46v-245H426.54v245H180Zm300-332.62Z"/></svg>
-          </div><div class="text">Início</div></div>
-          <div class="arrow">›</div>
+        <div class="menu-item" onclick="showScreen('home')">
+          <div class="label">
+            <div class="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#FFFFFF"><path d="M225.39-185.39h155.76v-244.99h197.7v244.99h155.76v-381.92L480-759.23 225.39-567.44v382.05ZM180-140v-450l300-225.77L780-590v450H533.46v-245H426.54v245H180Zm300-332.62Z"/></svg>
+
+            </div>
+            <div class="text">Início</div>
+          </div>
         </div>
 
-        <!-- Item de menu "Produtos" com submenu -->
         <div class="menu-item" id="m1-toggle" onclick="toggleSub('m1')">
           <div class="label"><div class="icon">
             <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#FFFFFF"><path d="M247.77-372.23h346.15l45.39-45.38H247.77v45.38Zm0-173h213.31v-45.38H247.77v45.38ZM145.39-694.61V-266h342.3l-46 46H100v-520h760v147.08h-45.39v-101.69H145.39Zm743.07 210.76q4.61 4.44 4.61 11.35 0 6.91-4.61 11.35l-34.69 34.69-36.16-36.15 36.02-36.02q4.52-4.52 9.77-4.52 5.26 0 9.98 4.61l15.08 14.69Zm-355 342.31v-36.15l259.69-259.69 36.16 36.15-259.7 259.69h-36.15ZM145.39-694.61V-266v-428.61Z"/></svg>
@@ -254,12 +237,11 @@
           <div class="arrow">›</div>
         </div>
         <div class="submenu" id="m1">
-          <a href="#" onclick="showScreen('prod-list');return false">Grupo de Propriedade</a>
-          <a href="#" onclick="showScreen('prod-create');return false">Propriedade</a>
-          <a href="#" onclick="showScreen('prod-cats');return false">Categorias</a>
+          <a href="#" onclick="showScreen('prod-list')">Grupo de Propriedade</a>
+          <a href="#" onclick="showScreen('prod-create')">Propriedade</a>
+          <a href="#" onclick="showScreen('prod-cats')">Categorias</a>
         </div>
 
-        <!-- Item de menu "Configurações" com submenu -->
         <div class="menu-item" id="m2-toggle" onclick="toggleSub('m2')">
           <div class="label"><div class="icon">
             <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#FFFFFF"><path d="m437.62-414.15 201.99-201.23-32.61-32-169.59 170-84.79-85-32.62 32 117.62 116.23ZM55.39-150.77v-45.39h849.22v45.39H55.39Zm102.3-100q-23.53 0-40.61-17.08T100-308.46v-444.61q0-23.53 17.08-40.62 17.08-17.08 40.61-17.08h644.62q23.53 0 40.61 17.08Q860-776.6 860-753.07v444.61q0 23.53-17.08 40.61t-40.61 17.08H157.69Zm0-45.38h644.62q4.61 0 8.46-3.85 3.84-3.85 3.84-8.46v-444.61q0-4.62-3.84-8.47-3.85-3.84-8.46-3.84H157.69q-4.61 0-8.46 3.84-3.84 3.85-3.84 8.47v444.61q0 4.61 3.84 8.46 3.85 3.85 8.46 3.85Zm-12.3 0v-469.23 469.23Z"/></svg>
@@ -267,59 +249,60 @@
           <div class="arrow">›</div>
         </div>
         <div class="submenu" id="m2">
-          <a href="#" onclick="showScreen('profile');return false">Perfil</a>
-          <a href="#" onclick="showScreen('prefs');return false">Preferências</a>
+          <a href="#" onclick="showScreen('profile')">Perfil</a>
+          <a href="#" onclick="showScreen('prefs')">Preferências</a>
         </div>
 
-        <!-- Item de menu "Relatórios" -->
         <div class="menu-item" onclick="showScreen('reports')">
           <div class="label"><div class="icon">
             <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#FFFFFF"><path d="M330-497.31v-45.38h300v45.38H330Zm0-160v-45.38h300v45.38H330ZM225.39-382.69H540q24.83 0 45.91 11.04 21.09 11.04 36.32 30.27L734.61-195v-607.31q0-5.38-3.46-8.84t-8.84-3.46H237.69q-5.38 0-8.84 3.46t-3.46 8.84v419.62Zm12.3 237.3H715L586.39-313.62q-8.34-11.03-20.5-17.36-12.15-6.33-25.89-6.33H225.39v179.62q0 5.38 3.46 8.84t8.84 3.46ZM722.31-100H237.69q-23.53 0-40.61-17.08T180-157.69v-644.62q0-23.53 17.08-40.61T237.69-860h484.62q23.53 0 40.61 17.08T780-802.31v644.62q0 23.53-17.08 40.61T722.31-100Zm-496.92-45.39v-669.22 669.22Zm0-191.92v-45.38 45.38Z"/></svg>
           </div><div class="text">Relatórios</div></div>
-          <div class="arrow">›</div>
         </div>
       </div>
     </nav>
 
-    <!-- Botão para recolher/expandir sidebar -->
+    <!-- Botão SAIR -->
+    <button class="logout-btn" onclick="window.location.href='/login/'">Sair</button>
+
+  
+    
     <div style="margin-top:auto;padding:6px">
       <button class="toggle-btn" id="collapseBtn" onclick="toggleSidebar()"></button>
     </div>
   </aside>
 
-  <!-- Área principal de conteúdo -->
   <main class="main">
     <div class="topbar">
-      <!-- Botão de toggle da sidebar no topo -->
-      <button class="toggle-btn" onclick="toggleSidebar()">
-        <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#000000"><path d="M140-254.62V-300h680v45.38H140Zm0-202.69v-45.38h680v45.38H140ZM140-660v-45.38h680V-660H140Z"/></svg>
-      </button>
-      <!-- Título da tela atual -->
-      <h2 id="screen-title">Início</h2>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="toggle-btn" onclick="toggleSidebar()">
+          <svg xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 -960 960 960" width="48px" fill="#000000"><path d="M140-254.62V-300h680v45.38H140Zm0-202.69v-45.38h680v45.38H140ZM140-660v-45.38h680V-660H140Z"/></svg>
+
+        </button>
+        <h2 id="screen-title">Início</h2>
+      </div>
+
+      <!-- Nome do usuário -->
+      <div class="user-info">
+        {{ request.user.username }}
+      </div>
     </div>
 
-    <!-- Área onde o conteúdo dinâmico é carregado -->
     <section id="screen" class="card">
       <h3>Bem-vindo!</h3>
       <p>Esta é a tela inicial. Use o menu à esquerda para abrir outras telas (o conteúdo aparece aqui).</p>
     </section>
   </main>
 
-  <!-- Scripts JavaScript -->
   <script>
-    // Referências de elementos
     const sidebar = document.getElementById('sidebar');
-    const collapseBtn = document.getElementById('collapseBtn');
 
-    // Alterna recolhimento/expansão da sidebar
     function toggleSidebar(){
       sidebar.classList.toggle('collapsed');
     }
 
-    // Alterna exibição de submenu
     function toggleSub(id){
       const sub = document.getElementById(id);
-      const toggle = document.getElementById(id + '-toggle') || document.querySelector(`[onclick*="toggleSub('${id}')"]`);
+      const toggle = document.getElementById(id + '-toggle');
       const isOpen = sub.style.display === 'flex';
       if(isOpen){
         sub.style.display = 'none';
@@ -331,19 +314,15 @@
       }
     }
 
-    // Exibe a tela correspondente ao menu clicado
     function showScreen(name){
       const screen = document.getElementById('screen');
       const title = document.getElementById('screen-title');
 
-      // Tela especial: Lista de produtos via Django
       if (name === 'prod-list') {
         title.textContent = 'Grupo de Propriedade';
         fetch('/produtos/')
           .then(response => response.text())
-          .then(html => {
-            screen.innerHTML = html; // Carrega conteúdo da view no card
-          })
+          .then(html => { screen.innerHTML = html; })
           .catch(error => {
             console.error('Erro ao carregar produtos:', error);
             screen.innerHTML = '<p>Erro ao carregar produtos.</p>';
@@ -351,7 +330,6 @@
         return;
       }
 
-      // Outras telas com conteúdo fixo
       const screens = {
         'home': {title:'Início', html:`<h3>Início</h3><p>Conteúdo da tela inicial.</p>`},
         'prod-create': {title:'Criar Produto', html:`<h3>Criar Produto</h3><p>Formulário de criação.</p>`},
@@ -365,11 +343,9 @@
       title.textContent = s.title;
       screen.innerHTML = s.html;
 
-      // Fecha sidebar automaticamente em telas pequenas
       if(window.innerWidth < 800){ sidebar.classList.add('collapsed'); }
     }
 
-    // Atalho de teclado: tecla 'M' alterna sidebar
     window.addEventListener('keydown', e=>{ 
       if(e.key.toLowerCase()==='m'){ toggleSidebar(); } 
     });
