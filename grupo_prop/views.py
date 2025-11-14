@@ -20,6 +20,9 @@ def listar_propriedades(request):
     # Renderiza a página de listagem de propriedades, passando os dados obtidos
     return render(request, 'telas/lista.html', {'grupo_propriedade': grupo_propriedade})
 
+# def modal_gp(request):
+#     return render(request, 'telas/modal_gp.html')
+
 def login(request):
     # Verifica se o método da requisição é POST (ou seja, se o formulário foi enviado)
     if request.method == 'POST':
@@ -62,7 +65,6 @@ def login(request):
 
         else:
             
-            print('usuario ou senha invalida')
             # Caso não encontre usuário/senha, mostra uma mensagem de erro
             messages.error(request, 'Usuário ou senha inválidos.')
 

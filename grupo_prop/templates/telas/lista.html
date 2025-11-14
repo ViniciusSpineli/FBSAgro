@@ -1,73 +1,164 @@
-<!-- Título da seção 
-<h3>Lista de Grupo de Propriedades</h3>
--->
+{% load static %}
 
 <style>
 
 .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between; /* <-- para alinhar usuário à direita */
-      gap:12px;
-      margin-bottom:12px;
-    }
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:12px;
+}
+
+/* Fundo escuro atrás do modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: none; /* escondido por padrão */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Caixa do modal */
+.modal {
+  width: 50%;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+.modal h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.modal label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.modal input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.modal-buttons {
+  text-align: right;
+}
+
+.modal-buttons button {
+  padding: 8px 15px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-confirmar {
+  background: #28a745;
+  color: white;
+}
+
+.btn-cancelar {
+  background: #dc3545;
+  color: white;
+}
 
 </style>
 
-    <!-- Topbar com título à esquerda e botão à direita -->
-    <div class="topbar">
-        <!-- Título da seção -->
-        <h3>Lista de Grupo de Propriedades</h3>
+<!-- Topbar -->
+<div class="topbar">
+    <h3>Lista de Grupo de Propriedades</h3>
 
-        <!-- Botão no canto direito -->
-        <button style="padding: 6px 12px; cursor: pointer;">
-            Novo Grupo
-        </button>
+    <!-- Agora abre o modal corretamente -->
+    <button onclick="abrirModal()" 
+      
+      style="padding:6px 12px; background:#4CAF50; color:#fff; border:none; border-radius:4px; cursor:pointer;">
+      Novo Grupo
+    </button>
+</div>
+
+
+<!-- MODAL (único e correto) -->
+<div class="modal-overlay" id="modalOverlay2">
+  <div class="modal">
+    <h2>Cadastro</h2>
+
+    <label for="codigo">Código</label>
+    <input type="text" id="codigo">
+
+    <label for="descricao">Descrição</label>
+    <input type="text" id="descricao">
+
+    <div class="modal-buttons">
+      <button class="btn-cancelar" onclick="fecharModal()">Cancelar</button>
+      <button class="btn-confirmar" onclick="confirmarDados()">Confirmar</button>
     </div>
+  </div>
+</div>
 
 
-<!-- Início da tabela que exibirá a lista de propriedades -->
+<!-- TABELA -->
 <table style="border-collapse: collapse; width: 100%;">
-    
-    <!-- Cabeçalho da tabela -->
+
     <tr>
-        <!-- Cabeçalho da primeira coluna: "Código" -->
         <th style="border: 1px solid #000; padding: 5px; text-align: left;">Código</th>
-        
-        <!-- Cabeçalho da segunda coluna: "Descrição" -->
         <th style="border: 1px solid #000; padding: 5px; text-align: left;">Descrição</th>
     </tr>
-    
-    
-    
-    <!-- Início do loop Django que percorre a lista 'grupo_propriedade' -->
-    {% for p in grupo_propriedade %}
-    
-    <!-- Cada item da lista gera uma nova linha na tabela -->
-    <tr>
-        <!-- Exibe o código da propriedade atual -->
-        <td style="border: 1px solid #000; padding: 8px;">{{ p.cod_grupo_propriedade }}</td>
-        <!-- Exibe a descrição da propriedade atual -->
-        <td style="border: 1px solid #000; padding: 8px;">{{ p.des_grupo_propriedade }}</td>
-        
-    </tr>
-    
-    
 
-    <!-- Caso a lista 'grupo_propriedade' esteja vazia -->
-    {% empty %}
-    
-    <!-- Linha única informando que não há registros -->
+    {% for p in grupo_propriedade %}
     <tr>
-        <!-- 'colspan="3"' faz a célula ocupar 3 colunas (mesmo que só haja 2 aqui, é inofensivo) -->
-        <td colspan="3" style="border: 1px solid #000; padding: 8px; text-align: center;">
+        <td style="border: 1px solid #000; padding: 8px;">{{ p.cod_grupo_propriedade }}</td>
+        <td style="border: 1px solid #000; padding: 8px;">{{ p.des_grupo_propriedade }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="2" style="border: 1px solid #000; padding: 8px; text-align: center;">
             Nenhum produto encontrado.
         </td>
     </tr>
-    x
-    <!-- Fim do loop 'for' -->
     {% endfor %}
-
-    
 </table>
 
+
+<!-- JAVASCRIPT -->
+<script>
+    print('abrindo modal')
+    console.log("JS carregado!");
+
+    alert('abrindo modal')
+
+    function abrirModal() {
+        alert('abrindo modal')
+        console.log("Função abrirModal() foi chamada!");
+        document.getElementById("modalOverlay2").style.display = "flex";
+    }
+
+    /*
+    function abrirModal() {
+    document.getElementById("modalOverlay2").style.display = "flex";
+    }
+
+    function fecharModal() {
+    document.getElementById("modalOverlay2").style.display = "none";
+    }
+
+    function confirmarDados() {
+    let codigo = document.getElementById("codigo").value;
+    let descricao = document.getElementById("descricao").value;
+
+    alert(`Código: ${codigo}\nDescrição: ${descricao}`);
+    fecharModal();
+    }
+    */
+</script>

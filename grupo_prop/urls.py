@@ -8,4 +8,6 @@ urlpatterns = [
     path('login/', views.login, name='login'),     # http://127.0.0.1:8000/login/
     path('inicio/', views.inicio, name='inicio'),  # http://127.0.0.1:8000/inicio/
     path('produtos/', views.listar_propriedades, name='listar_propriedades'),
+    #path('modal-gp/', views.modal_gp, name='modal_gp')
+
 ]
