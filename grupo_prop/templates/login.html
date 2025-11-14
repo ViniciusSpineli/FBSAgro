@@ -132,12 +132,23 @@
       <div id="erroSenha" class="error-message"></div>
     </div>
     -->
+
+    <!-- MENSAGENS DE ERRO -->
+    {% if messages %}
+          
+      {% for message in messages %}
+        <h3 style="color:yellow;">{{ message }}</h3>
+      {% endfor %}
+    
+    {% endif %}
+
     <!-- FORMULÁRIO -->
     <form method="POST" action="{% url 'login' %}">
       {% csrf_token %}
       <div class="form-group">
         <label for="usuario">Usuário</label>
-        <input type="text" id="usuario" name="usuario" placeholder="Digite seu usuário">
+        <input type="text" id="usuario" name="usuario" placeholder="Digite seu usuário"> 
+          
       </div>
 
       <div class="form-group">
@@ -150,14 +161,8 @@
 
       <button class="login-btn" type="submit">Login</button>
 
-      <!-- MENSAGENS DE ERRO -->
-      {% if messages %}
-        {% for message in messages %}
-          <div class="error-message">{{ message }}
-            
-          </div>
-        {% endfor %}
-      {% endif %}
+      
+
     </form>
     
     <!--
@@ -165,50 +170,6 @@
     -->
 
   </div>
-
-  <script>
-    function togglePassword() {
-      const senhaInput = document.getElementById("senha");
-      senhaInput.type = senhaInput.type === "password" ? "text" : "password";
-    }
-
-    function validarLogin() {
-      const usuario = document.getElementById("usuario");
-      const senha = document.getElementById("senha");
-      const erroUsuario = document.getElementById("erroUsuario");
-      const erroSenha = document.getElementById("erroSenha");
-
-      let valido = true;
-
-      // Limpa mensagens antigas
-      erroUsuario.style.display = "none";
-      erroSenha.style.display = "none";
-
-      if (usuario.value.trim() === "") {
-        erroUsuario.innerText = "O campo usuário precisa ser preenchido.";
-        erroUsuario.style.display = "block";
-        valido = false;
-      }
-
-      if (senha.value.trim() === "") {
-        erroSenha.innerText = "O campo senha precisa ser preenchido.";
-        erroSenha.style.display = "block";
-        valido = false;
-      }
-
-      if (valido) {
-        window.location.href = "{% url 'inicio' %}";
-      }
-    }
-
-  document.getElementById("usuario").addEventListener("input", () => {
-    document.getElementById("erroUsuario").style.display = "none";
-  });
-
-  document.getElementById("senha").addEventListener("input", () => {
-    document.getElementById("erroSenha").style.display = "none";
-  });
-</script>
 
 
 </body>

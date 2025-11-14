@@ -7,7 +7,8 @@ def inicio(request):
     # Pega o usuário da sessão, ou exibe 'Usuário não identificado' se não houver
     #usuario = request.session.get('usuario', 'Usuário não identificado')
     # Renderiza a página inicial passando o nome do usuário
-    usuario = getattr(request, 'usuario_temp', 'Visitante')
+    usuario = request.session.get('usuario', 'Visitante')
+    #usuario = getattr(request, 'usuario_temp', 'Visitante')
     return render(request, 'telas/inicio.html', {'usuario': usuario})
 
     #return render(request, 'telas/inicio.html', {'usuario': usuario})
@@ -27,6 +28,19 @@ def login(request):
         # Pega o valor do campo 'senha' enviado pelo formulário
         senha = request.POST.get('senha').upper()
         
+        if not usuario and not senha: 
+            messages.error(request, 'Usuario e senha não preenchido')
+            return render(request, 'login.html')
+
+        if not usuario:
+            messages.error(request, 'O campo usuário não pode estar vazio.')
+            return render(request, 'login.html')
+        
+        if not senha:
+            messages.error(request, 'O campo senha não pode estar vazio.')
+            return render(request, 'login.html')
+
+
         # Abre um cursor para executar SQL diretamente no banco de dados
         with connection.cursor() as cursor:
             # Executa uma consulta SQL para verificar se existe um usuário com o login e senha informados
@@ -41,7 +55,9 @@ def login(request):
             row = cursor.fetchone()
         # Verifica se a consulta retornou algum resultado (usuário válido)
         if row:
-            request.usuario_temp = row[0]  # só existe nesta requisição
+            
+            request.session['usuario'] = row[0]
+            #request.usuario_temp = row[0]  # só existe nesta requisição
             return inicio(request)  # passa a mesma request
 
         else:

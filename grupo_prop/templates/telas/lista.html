@@ -1,9 +1,30 @@
-<!-- Título da seção -->
-<h3>Lista de Propriedades</h3>
+<!-- Título da seção 
+<h3>Lista de Grupo de Propriedades</h3>
+-->
 
-<button style="border-collapse: collapse; width: 20%; ">
-   Novo Grupo
-</button>
+<style>
+
+.topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between; /* <-- para alinhar usuário à direita */
+      gap:12px;
+      margin-bottom:12px;
+    }
+
+</style>
+
+    <!-- Topbar com título à esquerda e botão à direita -->
+    <div class="topbar">
+        <!-- Título da seção -->
+        <h3>Lista de Grupo de Propriedades</h3>
+
+        <!-- Botão no canto direito -->
+        <button style="padding: 6px 12px; cursor: pointer;">
+            Novo Grupo
+        </button>
+    </div>
+
 
 <!-- Início da tabela que exibirá a lista de propriedades -->
 <table style="border-collapse: collapse; width: 100%;">
