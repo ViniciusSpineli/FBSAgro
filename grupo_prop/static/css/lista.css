@@ -1,3 +1,6 @@
+*{
+    font-family: "Stack Sans Text", sans-serif;
+}
 /* Topbar */
 .topbar {
     display: flex;                  /* Define que os elementos filhos ficam em linha (flexbox) */
@@ -10,11 +13,13 @@
 /* Botão novo grupo */
 .btn-novo-grupo {
     padding: 6px 12px;              /* Espaçamento interno do botão: 6px vertical, 12px horizontal */
-    background: #4CAF50;            /* Cor de fundo verde */
+    background: #189117;            /* Cor de fundo verde */
     color: #fff;                     /* Cor do texto branca */
     border: none;                    /* Remove borda padrão */
     border-radius: 4px;              /* Bordas arredondadas de 4px */
-    cursor: pointer;                 /* Cursor muda para mãozinha ao passar o mouse */
+    cursor: pointer;                  /* Cursor muda para mãozinha ao passar o mouse */    
+    width: 150px;        
+    height: 50px;
 }
 .btn-novo-grupo:hover {
     background: #3e8e41;             /* Cor de fundo mais escura quando o mouse passa por cima */
@@ -92,8 +97,9 @@
 .tabela th,
 .tabela td {
     border: 1px solid #000;          /* Bordas pretas em todas as células */
-    padding: 8px;                    /* Espaçamento interno das células */
+    /*padding: 8px;                    /* Espaçamento interno das células */
     text-align: left;                /* Texto alinhado à esquerda */
+    
 }
 
 .tabela .nenhum {
@@ -105,3 +111,46 @@
 #modal-toggle:checked ~ #modal-overlay {
     display: flex;                   /* Exibe o modal centralizado quando o checkbox estiver marcado */
 }
+
+
+.gp-alert {
+    background: #ffdddd;
+    border-left: 5px solid #d9534f;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #a94442;
+    border-radius: 6px;
+}
+
+.excluir-btn {
+  background:#ffffff;
+  color:#d9534f;
+  border:none;
+  border-radius:8px;
+  
+  width:100%;
+  font-size: 20px;
+  cursor:pointer;
+  font-weight:600;
+  transition:background 0.2s ease;
+}
+
+/*
+.labels.codigo {
+    flex: 0 0 10px;         /* largura fixa de 100px 
+}
+
+.labels.desc {
+    flex: 1;         /* largura fixa de 100px 
+}
+
+.lista.codigo{
+    flex: 0 0 10px;         /* largura fixa de 100px /
+}
+
+.lista.desc{
+    flex: 1;          /*largura fixa de 100px  *
+}
+
+*/

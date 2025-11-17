@@ -82,3 +82,35 @@ def listar_propriedades(request):
 
     # Renderiza o template 'lista.html' e passa o contexto
     return render(request, 'telas/lista.html', context)
+
+def add_grupo(request):
+    if request.method == "POST":
+
+        codigo = request.POST.get("codigo")
+        descricao = request.POST.get("descricao")
+
+        if not codigo or not descricao:
+            messages.error(request, "Código e descrição são obrigatórios.")
+            return redirect("inicio")   # <<< SEMPRE redirect
+
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute("""
+                    INSERT INTO TAB_GRUPO_PROPRIEDADE (
+                        COD_GRUPO_PROPRIEDADE,
+                        DES_GRUPO_PROPRIEDADE
+                    ) VALUES (:codigo, :descricao)
+                """, {
+                    "codigo": codigo,
+                    "descricao": descricao
+                })
+
+            messages.success(request, "Grupo cadastrado com sucesso!")
+            return redirect("inicio")
+
+        except Exception as e:
+            messages.error(request, f"Erro ao inserir grupo: {e}")
+            return redirect("inicio")
+
+
+

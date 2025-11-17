@@ -3,16 +3,26 @@
 <html lang="pt-BR">
 
 
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Início - FBS Agro</title>
+    <title>FBS Agro</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'css/inicio.css' %}">
 </head>
 
 <body data-page="inicio">
+
+{% if erro_modal %}
+    <script>
+        window.onload = function() {
+            document.getElementById("modal-overlay").style.display = "flex";
+        }
+    </script>
+{% endif %}
 
 <!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
@@ -54,8 +64,10 @@
                 <div class="arrow">›</div>
             </div>
 
-            <div class="submenu" id="m1">
+            <div class="submenu {% if submenu_aberto == 'cadastro_propriedades' %}open{% endif %}" id="m1">
+            <!--div class="submenu" id="m1"-->
                 <a href="#" onclick="showScreen('prod-list')">Grupo de Propriedade</a>
+                
                 <a href="#" onclick="showScreen('prod-create')">Propriedade</a>
                 <a href="#" onclick="showScreen('prod-cats')">Categorias</a>
             </div>

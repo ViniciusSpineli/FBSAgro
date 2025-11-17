@@ -65,13 +65,22 @@
 
 /* Linha de campos no modal (para colocar mais de um campo na mesma linha) */
 .gp-row {
-    display: flex;                     /* Flexbox para alinhar os campos horizontalmente */
-    gap: 16px;                         /* Espaçamento entre os campos */
+    display: flex;           /* Coloca os campos lado a lado */
+    gap: 16px;               /* Espaçamento entre os campos */
 }
 
-/* Cada campo individual dentro de gp-row */
+/* Campo individual dentro da linha */
 .gp-field {
-    display: flex;                     /* Flexbox para empilhar label e input verticalmente */
-    flex-direction: column;            /* Label acima do input */
-    flex: 1;                           /* Todos os campos dentro da mesma linha ocupam o mesmo tamanho */
+    display: flex;
+    flex-direction: column;  /* Label acima do input */
+}
+
+/* Diminuir largura do campo Código */
+.gp-field.gp-codigo {
+    flex: 0 0 10px;         /* largura fixa de 100px */
+}
+
+/* Campo Descrição ocupa o restante */
+.gp-field.gp-descricao {
+    flex: 1;                 /* ocupa o restante da linha */
 }

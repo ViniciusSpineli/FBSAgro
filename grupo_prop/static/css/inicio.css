@@ -10,7 +10,8 @@
 
 *{
   box-sizing:border-box;
-  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, 'Helvetica Neue', Arial;
+  font-family: "Stack Sans Text", sans-serif;
+  /*font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, 'Helvetica Neue', Arial;*/
 }
 
 body{
