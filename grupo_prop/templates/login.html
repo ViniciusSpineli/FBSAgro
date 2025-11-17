@@ -1,182 +1,41 @@
+{% extends 'base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login - FBS Agro</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+{% block content %}
 
-    body {
-      background-color: #008000;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    .container {
-      text-align: center;
-      width: 100%;
-      max-width: 400px;
-    }
-
-    .logo {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .logo img {
-      width: 60%;
-      margin-bottom: 10px;
-    }
-
-    .form-group {
-      text-align: left;
-      margin-bottom: 20px;
-      position: relative;
-    }
-
-    label {
-      display: block;
-      font-size: 16px;
-      margin-bottom: 8px;
-    }
-
-    input {
-      width: 100%;
-      padding: 14px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      outline: none;
-      font-size: 15px;
-    }
-
-    input:focus {
-      border-color: #007bff;
-    }
-
-    .password-container {
-      position: relative;
-    }
-
-    .toggle-password {
-      position: absolute;
-      top: 70%;
-      right: 14px;
-      transform: translateY(-50%);
-      cursor: pointer;
-      color: #666;
-      background: none;
-      border: none;
-    }
-
-    button.login-btn {
-      width: 100%;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 15px;
-      border-radius: 10px;
-      font-size: 17px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    button.login-btn:hover {
-      background-color: #005fc0;
-    }
-
-    .error-message {
-      color: black;
-      background-color: yellow;
-      border: 1px solid white;
-      padding: 8px;
-      border-radius: 6px;
-      font-size: 13px;
-      margin-top: 6px;
-      display: none;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
+<div class="container">
     <div class="logo">
-      <img src="{% static 'logo FBS AGRO.png' %}" alt="FBS Agro Logo">
+      <img src="{% static 'img/logo FBS AGRO.png' %}" alt="FBS Agro Logo">
     </div>
 
-    <!--
-    <div class="form-group">
-      <label for="usuario">Usuário</label>
-      <input type="text" id="usuario" placeholder="Digite seu usuário" />
-      <div id="erroUsuario" class="error-message"></div>
-    </div>
-
-    <div class="form-group">
-      <label for="senha">Senha</label>
-      <div class="password-container">
-        <input type="password" id="senha" placeholder="Digite sua senha" />
-        <button class="toggle-password" type="button" onclick="togglePassword()">
-          <svg xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 -960 960 960" width="28px" fill="#1f1f1f"><path d="M480.12-330q70.88 0 120.38-49.62t49.5-120.5q0-70.88-49.62-120.38T479.88-670Q409-670 359.5-620.38T310-499.88q0 70.88 49.62 120.38t120.5 49.5Zm-.36-58q-46.76 0-79.26-32.74-32.5-32.73-32.5-79.5 0-46.76 32.74-79.26 32.73-32.5 79.5-32.5 46.76 0 79.26 32.74 32.5 32.73 32.5 79.5 0 46.76-32.74 79.26-32.73 32.5-79.5 32.5Zm.24 188q-146 0-264-83T40-500q58-134 176-217t264-83q146 0 264 83t176 217q-58 134-176 217t-264 83Zm0-300Zm-.17 240Q601-260 702.5-325.5 804-391 857-500q-53-109-154.33-174.5Q601.34-740 480.17-740T257.5-674.5Q156-609 102-500q54 109 155.33 174.5Q358.66-260 479.83-260Z"/></svg>
-        </button>
-      </div>
-      <div id="erroSenha" class="error-message"></div>
-    </div>
-    -->
-
-    <!-- MENSAGENS DE ERRO -->
     {% if messages %}
-          
       {% for message in messages %}
         <h3 style="color:yellow;">{{ message }}</h3>
       {% endfor %}
-    
     {% endif %}
 
-    <!-- FORMULÁRIO -->
     <form method="POST" action="{% url 'login' %}">
       {% csrf_token %}
       <div class="form-group">
         <label for="usuario">Usuário</label>
-        <input type="text" id="usuario" name="usuario" placeholder="Digite seu usuário"> 
-          
+        <input type="text" id="usuario" name="usuario" placeholder="Digite seu usuário">
       </div>
 
       <div class="form-group">
         <label for="senha">Senha</label>
-        <input type="password" id="senha" name="senha" placeholder="Digite sua senha"> 
+        <div class="password-container">
+          <input type="password" id="senha" name="senha" placeholder="Digite sua senha">
           <button class="toggle-password" type="button" onclick="togglePassword()">
-          <svg xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 -960 960 960" width="28px" fill="#1f1f1f"><path d="M480.12-330q70.88 0 120.38-49.62t49.5-120.5q0-70.88-49.62-120.38T479.88-670Q409-670 359.5-620.38T310-499.88q0 70.88 49.62 120.38t120.5 49.5Zm-.36-58q-46.76 0-79.26-32.74-32.5-32.73-32.5-79.5 0-46.76 32.74-79.26 32.73-32.5 79.5-32.5 46.76 0 79.26 32.74 32.5 32.73 32.5 79.5 0 46.76-32.74 79.26-32.73 32.5-79.5 32.5Zm.24 188q-146 0-264-83T40-500q58-134 176-217t264-83q146 0 264 83t176 217q-58 134-176 217t-264 83Zm0-300Zm-.17 240Q601-260 702.5-325.5 804-391 857-500q-53-109-154.33-174.5Q601.34-740 480.17-740T257.5-674.5Q156-609 102-500q54 109 155.33 174.5Q358.66-260 479.83-260Z"/></svg>
-        </button>
+            <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#1f1f1f"><path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/></svg>
+          </button>
+        </div>
       </div>
 
       <button class="login-btn" type="submit">Login</button>
-
-      
-
     </form>
-    
-    <!--
-    <button class="login-btn" onclick="validarLogin()">Login</button>
-    -->
+</div>
 
-  </div>
+<!-- JS EXTERNO -->
+<script src="{% static 'js/login.js' %}"></script>
 
-  <script>
-    function togglePassword() {
-      const input = document.getElementById("senha");
-      const type = input.getAttribute("type") === "password" ? "text" : "password";
-      input.setAttribute("type", type);
-    }
-  </script>
-</body>
-</html>
+{% endblock %}

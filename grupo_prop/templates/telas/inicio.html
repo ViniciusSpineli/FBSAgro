@@ -1,364 +1,147 @@
 {% load static %}
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <link rel="icon" type="image/x-icon" href="{% static 'midias/fbs_2017.ico' %}">
-  <title>FBS Agro</title>
-  
-  <style>
-    :root{
-      --sidebar-collapsed-width:60px;
-      --sidebar-expanded-width:240px;
-      --transition:0.28s;
-      --bg:#0f172a;
-      --panel:#0b1220;
-      --accent:#4f46e5;
-      --muted:#9aa4b2;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Início - FBS Agro</title>
 
-    *{
-      box-sizing:border-box;
-      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, 'Helvetica Neue', Arial;
-    }
-
-    body{
-      margin:0;
-      background:linear-gradient(180deg,#ffffff 100%, #071427 0%);
-      color:#0b1220;
-      height:100vh;
-      display:flex;
-    }
-
-    .sidebar{
-      width:var(--sidebar-expanded-width);
-      background-color: #189117;
-      padding:12px;
-      display:flex; 
-      flex-direction:column;
-      gap:8px;
-      transition:width var(--transition) ease;
-      overflow:hidden;
-      color: white;
-    }
-
-    .sidebar.collapsed{
-      width:var(--sidebar-collapsed-width);
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding:8px 6px;
-    }
-
-    .brand .logo{
-      width:90%;
-      height:200px;
-      border-radius:8px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:700;
-    }
-
-    .brand .logo img{
-      width: 100%;
-      height: 100%;
-      border-radius:5px;
-      object-fit: contain;
-    }
-
-    .menu{
-      flex:1;
-      overflow:auto;
-      padding-right:6px;
-    }
-
-    .menu-item{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:10px;
-      border-radius:8px;
-      cursor:pointer;
-      user-select:none;
-    }
-
-    .menu-item:hover{
-      background:rgba(255,255,255,0.1);
-    }
-
-    .menu-item .label{
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-
-    .menu-item .icon{
-      width:28px;
-      height:28px;
-      border-radius:6px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:rgba(255,255,255,0.1);
-    }
-
-    .submenu{
-      margin-top:6px;
-      padding-left:44px;
-      display:none;
-      flex-direction:column;
-      gap:6px;
-    }
-
-    .submenu a{
-      padding:8px;
-      border-radius:6px;
-      text-decoration:none;
-      color:white;
-      font-size:14px;
-    }
-
-    .submenu a:hover{
-      background:rgba(255,255,255,0.1);
-    }
-
-    .arrow{
-      transition:transform var(--transition) ease;
-    }
-
-    .menu-item.open .arrow{
-      transform:rotate(90deg);
-    }
-
-    .main{
-      flex:1;
-      padding:18px;
-      overflow:auto;
-    }
-
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      padding:18px;
-      border-radius:12px;
-      box-shadow:0 6px 20px rgba(2,6,23,0.6);
-    }
-
-    .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between; /* <-- para alinhar usuário à direita */
-      gap:12px;
-      margin-bottom:12px;
-    }
-
-    .topbar .user-info{
-      font-weight:600;
-      color:#000;
-      display:flex;
-      align-items:center;
-      justify-content:space-between; /* <-- para alinhar usuário à direita */
-      gap:12px;
-      margin-bottom:12px;
-    }
-
-    .toggle-btn{
-      background:transparent;
-      border:1px solid rgba(255,255,255,0.04);
-      padding:8px;
-      border-radius:10px;
-      cursor:pointer;
-    }
-
-    @media (max-width:800px){
-      .sidebar{
-        position:absolute;
-        z-index:40;
-        height:100vh;
-        left:0;
-        top:0;
-      }
-      body{padding-left:0;}
-    }
-
-    .sidebar.collapsed .brand h1, 
-    .sidebar.collapsed .menu-item .text, 
-    .sidebar.collapsed .submenu{
-      display:none;
-    }
-
-    .sidebar.collapsed .menu-item {
-      justify-content:center;
-    }
-
-    .logout-btn {
-      background: #ffffff;
-      color: #189117;
-      border: none;
-      border-radius: 8px;
-      padding: 10px;
-      width: 100%;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background 0.2s ease;
-    }
-
-    .logout-btn:hover {
-      background: #d1ffd1;
-    }
-
-  </style>
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/inicio.css' %}">
 </head>
 
 <body>
-  <aside class="sidebar" id="sidebar">
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+
     <div class="brand">
-      <div class="logo">
-        <img src="{% static 'logo FBS AGRO.png' %}" alt="logo">
-      </div>
+        <div class="logo">
+            <img src="{% static 'img/logo FBS AGRO.png' %}" alt="logo">
+        </div>
     </div>
 
     <nav class="menu">
-      <div class="menu-group">
-        <div class="menu-item" onclick="showScreen('home')">
-          <div class="label">
-            <div class="icon">
-              <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#FFFFFF"><path d="M225.39-185.39h155.76v-244.99h197.7v244.99h155.76v-381.92L480-759.23 225.39-567.44v382.05ZM180-140v-450l300-225.77L780-590v450H533.46v-245H426.54v245H180Zm300-332.62Z"/></svg>
+        <div class="menu-group">
 
+            <!-- INÍCIO -->
+            <div class="menu-item" onclick="showScreen('home')">
+                <div class="label">
+                    <div class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="48px" 
+                             viewBox="0 -960 960 960" width="48px" fill="#FFFFFF">
+                             <path d="M225.39-185.39h155.76v-244.99h197.7v244.99h155.76v-381.92L480-759.23 225.39-567.44v382.05ZM180-140v-450l300-225.77L780-590v450H533.46v-245H426.54v245H180Zm300-332.62Z"/>
+                        </svg>
+
+                    </div>
+                    <div class="text">Início</div>
+                </div>
             </div>
-            <div class="text">Início</div>
-          </div>
-        </div>
 
-        <div class="menu-item" id="m1-toggle" onclick="toggleSub('m1')">
-          <div class="label"><div class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#FFFFFF"><path d="M247.77-372.23h346.15l45.39-45.38H247.77v45.38Zm0-173h213.31v-45.38H247.77v45.38ZM145.39-694.61V-266h342.3l-46 46H100v-520h760v147.08h-45.39v-101.69H145.39Zm743.07 210.76q4.61 4.44 4.61 11.35 0 6.91-4.61 11.35l-34.69 34.69-36.16-36.15 36.02-36.02q4.52-4.52 9.77-4.52 5.26 0 9.98 4.61l15.08 14.69Zm-355 342.31v-36.15l259.69-259.69 36.16 36.15-259.7 259.69h-36.15ZM145.39-694.61V-266v-428.61Z"/></svg>
-          </div><div class="text">Cadastros</div></div>
-          <div class="arrow">›</div>
-        </div>
-        <div class="submenu" id="m1">
-          <a href="#" onclick="showScreen('prod-list')">Grupo de Propriedade</a>
-          <a href="#" onclick="showScreen('prod-create')">Propriedade</a>
-          <a href="#" onclick="showScreen('prod-cats')">Categorias</a>
-        </div>
+            <!-- CADASTROS -->
+            <div class="menu-item" onclick="toggleSub('m1')">
+                <div class="label">
+                    <div class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="48px" 
+                             viewBox="0 -960 960 960" width="48px" fill="#FFFFFF">
+                             <path d="M247.77-372.23h346.15l45.39-45.38H247.77v45.38Zm0-173h213.31v-45.38H247.77v45.38ZM145.39-694.61V-266h342.3l-46 46H100v-520h760v147.08h-45.39v-101.69H145.39Zm743.07 210.76q4.61 4.44 4.61 11.35 0 6.91-4.61 11.35l-34.69 34.69-36.16-36.15 36.02-36.02q4.52-4.52 9.77-4.52 5.26 0 9.98 4.61l15.08 14.69Zm-355 342.31v-36.15l259.69-259.69 36.16 36.15-259.7 259.69h-36.15ZM145.39-694.61V-266v-428.61Z"/>
+                        </svg>
+                    </div>
+                    <div class="text">Cadastros</div>
+                </div>
+                <div class="arrow">›</div>
+            </div>
 
-        <div class="menu-item" id="m2-toggle" onclick="toggleSub('m2')">
-          <div class="label"><div class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#FFFFFF"><path d="m437.62-414.15 201.99-201.23-32.61-32-169.59 170-84.79-85-32.62 32 117.62 116.23ZM55.39-150.77v-45.39h849.22v45.39H55.39Zm102.3-100q-23.53 0-40.61-17.08T100-308.46v-444.61q0-23.53 17.08-40.62 17.08-17.08 40.61-17.08h644.62q23.53 0 40.61 17.08Q860-776.6 860-753.07v444.61q0 23.53-17.08 40.61t-40.61 17.08H157.69Zm0-45.38h644.62q4.61 0 8.46-3.85 3.84-3.85 3.84-8.46v-444.61q0-4.62-3.84-8.47-3.85-3.84-8.46-3.84H157.69q-4.61 0-8.46 3.84-3.84 3.85-3.84 8.47v444.61q0 4.61 3.84 8.46 3.85 3.85 8.46 3.85Zm-12.3 0v-469.23 469.23Z"/></svg>
-          </div><div class="text">Movimentação</div></div>
-          <div class="arrow">›</div>
-        </div>
-        <div class="submenu" id="m2">
-          <a href="#" onclick="showScreen('profile')">Perfil</a>
-          <a href="#" onclick="showScreen('prefs')">Preferências</a>
-        </div>
+            <div class="submenu" id="m1">
+                <a href="#" onclick="showScreen('prod-list')">Grupo de Propriedade</a>
+                <a href="#" onclick="showScreen('prod-create')">Propriedade</a>
+                <a href="#" onclick="showScreen('prod-cats')">Categorias</a>
+            </div>
 
-        <div class="menu-item" onclick="showScreen('reports')">
-          <div class="label"><div class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#FFFFFF"><path d="M330-497.31v-45.38h300v45.38H330Zm0-160v-45.38h300v45.38H330ZM225.39-382.69H540q24.83 0 45.91 11.04 21.09 11.04 36.32 30.27L734.61-195v-607.31q0-5.38-3.46-8.84t-8.84-3.46H237.69q-5.38 0-8.84 3.46t-3.46 8.84v419.62Zm12.3 237.3H715L586.39-313.62q-8.34-11.03-20.5-17.36-12.15-6.33-25.89-6.33H225.39v179.62q0 5.38 3.46 8.84t8.84 3.46ZM722.31-100H237.69q-23.53 0-40.61-17.08T180-157.69v-644.62q0-23.53 17.08-40.61T237.69-860h484.62q23.53 0 40.61 17.08T780-802.31v644.62q0 23.53-17.08 40.61T722.31-100Zm-496.92-45.39v-669.22 669.22Zm0-191.92v-45.38 45.38Z"/></svg>
-          </div><div class="text">Relatórios</div></div>
+            <!-- MOVIMENTAÇÃO -->
+            <div class="menu-item" onclick="toggleSub('m2')">
+                <div class="label">
+                    <div class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="48px" 
+                            viewBox="0 -960 960 960" width="48px" fill="#FFFFFF">
+                            <path d="m437.62-414.15 201.99-201.23-32.61-32-169.59 170-84.79-85-32.62 32 117.62 116.23ZM55.39-150.77v-45.39h849.22v45.39H55.39Zm102.3-100q-23.53 0-40.61-17.08T100-308.46v-444.61q0-23.53 17.08-40.62 17.08-17.08 40.61-17.08h644.62q23.53 0 40.61 17.08Q860-776.6 860-753.07v444.61q0 23.53-17.08 40.61t-40.61 17.08H157.69Zm0-45.38h644.62q4.61 0 8.46-3.85 3.84-3.85 3.84-8.46v-444.61q0-4.62-3.84-8.47-3.85-3.84-8.46-3.84H157.69q-4.61 0-8.46 3.84-3.84 3.85-3.84 8.47v444.61q0 4.61 3.84 8.46 3.85 3.85 8.46 3.85Zm-12.3 0v-469.23 469.23Z"/>
+                        </svg>
+                    </div>
+                    <div class="text">Movimentação</div>
+                </div>
+                <div class="arrow">›</div>
+            </div>
+
+            <div class="submenu" id="m2">
+                <a href="#" onclick="showScreen('profile')">Perfil</a>
+                <a href="#" onclick="showScreen('prefs')">Preferências</a>
+            </div>
+
+            <!-- RELATÓRIOS -->
+            <div class="menu-item" onclick="showScreen('reports')">
+                <div class="label">
+                    <div class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="48px" 
+                             viewBox="0 -960 960 960" width="48px" fill="#FFFFFF">
+                             <path d="M330-497.31v-45.38h300v45.38H330Zm0-160v-45.38h300v45.38H330ZM225.39-382.69H540q24.83 0 45.91 11.04 21.09 11.04 36.32 30.27L734.61-195v-607.31q0-5.38-3.46-8.84t-8.84-3.46H237.69q-5.38 0-8.84 3.46t-3.46 8.84v419.62Zm12.3 237.3H715L586.39-313.62q-8.34-11.03-20.5-17.36-12.15-6.33-25.89-6.33H225.39v179.62q0 5.38 3.46 8.84t8.84 3.46ZM722.31-100H237.69q-23.53 0-40.61-17.08T180-157.69v-644.62q0-23.53 17.08-40.61T237.69-860h484.62q23.53 0 40.61 17.08T780-802.31v644.62q0 23.53-17.08 40.61T722.31-100Zm-496.92-45.39v-669.22 669.22Zm0-191.92v-45.38 45.38Z"/>
+                        </svg>
+                    </div>
+                    <div class="text">Relatórios</div>
+                </div>
+            </div>
+
         </div>
-      </div>
     </nav>
 
-    <!-- Botão SAIR -->
-    <button class="logout-btn" onclick="window.location.href='/login/'">Sair</button>
+    <!-- BOTÃO SAIR -->
+    <button class="logout-btn" onclick="window.location.href='{% url "login" %}'">Sair</button>
 
-  
-    
-    <div style="margin-top:auto;padding:6px">
-      <button class="toggle-btn" id="collapseBtn" onclick="toggleSidebar()"></button>
+    <div class="sidebar-footer">
+        <button class="toggle-btn" onclick="toggleSidebar()"></button>
     </div>
-  </aside>
 
-  <main class="main">
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+    <!-- TOPBAR -->
     <div class="topbar">
-      <div style="display:flex;align-items:center;gap:12px;">
-        <button class="toggle-btn" onclick="toggleSidebar()">
-          <svg xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 -960 960 960" width="48px" fill="#000000"><path d="M140-254.62V-300h680v45.38H140Zm0-202.69v-45.38h680v45.38H140ZM140-660v-45.38h680V-660H140Z"/></svg>
 
-        </button>
-        <h2 id="screen-title">Início</h2>
-      </div>
+        <div class="left">
+            <button class="toggle-btn" onclick="toggleSidebar()">
+                <svg xmlns="http://www.w3.org/2000/svg" height="38px" 
+                     viewBox="0 -1050 960 960" width="38px" fill="#000000">
+                     <path d="M140-254.62V-300h680v45.38H140Zm0-202.69v-45.38h680v45.38H140ZM140-660v-45.38h680V-660H140Z"/>
+                </svg>
+                
+            </button>
+            <h2 id="screen-title">Início</h2>
+        </div>
 
-       <!-- Nome do usuário no canto direito -->
-       <div class="user-info" style="margin-left:auto;">
-         {% if usuario %}
-          <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M702-480 560-622l57-56 85 85 170-170 56 57-226 226Zm-342 0q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM40-160v-112q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v112H40Zm80-80h480v-32q0-11-5.5-20T580-306q-54-27-109-40.5T360-360q-56 0-111 13.5T140-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T440-640q0-33-23.5-56.5T360-720q-33 0-56.5 23.5T280-640q0 33 23.5 56.5T360-560Zm0 260Zm0-340Z"/></svg>
-           <h3> {{ usuario }} </h3>
-         {% endif %}
-       </div>
+        <div class="user-info">
+            {% if usuario %}
+                  <svg xmlns="http://www.w3.org/2000/svg" height="65px" 
+                      viewBox="0 -960 960 960" width="24px" fill="#000000">
+                      <path d="M702-480 560-622l57-56 85 85 170-170 56 57-226 226Zm-342 0q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM40-160v-112q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v112H40Zm80-80h480v-32q0-11-5.5-20T580-306q-54-27-109-40.5T360-360q-56 0-111 13.5T140-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T440-640q0-33-23.5-56.5T360-720q-33 0-56.5 23.5T280-640q0 33 23.5 56.5T360-560Zm0 260Zm0-340Z"/>
+                  </svg>
+                  <h3>{{ usuario }}</h3>
+            {% endif %}
+        </div>
 
-      
     </div>
 
+    <!-- CONTEÚDO PRINCIPAL -->
     <section id="screen" class="card">
-      <h3>Bem-vindo <p>{{ usuario }}</p> </h3>      
-      <p>Esta é a tela inicial. Use o menu à esquerda para abrir outras telas (o conteúdo aparece aqui).</p>
+        <h3>Bem-vindo, {{ usuario }}</h3>
+        <p>Use o menu à esquerda para navegar.</p>
     </section>
-  </main>
 
-  <script>
-    const sidebar = document.getElementById('sidebar');
+</main>
 
-    function toggleSidebar(){
-      sidebar.classList.toggle('collapsed');
-    }
+<!-- JS -->
+<script src="{% static 'js/inicio.js' %}"></script>
 
-    function toggleSub(id){
-      const sub = document.getElementById(id);
-      const toggle = document.getElementById(id + '-toggle');
-      const isOpen = sub.style.display === 'flex';
-      if(isOpen){
-        sub.style.display = 'none';
-        toggle.classList.remove('open');
-      }else{
-        sub.style.display = 'flex';
-        sub.style.flexDirection = 'column';
-        toggle.classList.add('open');
-      }
-    }
-
-    function showScreen(name){
-      const screen = document.getElementById('screen');
-      const title = document.getElementById('screen-title');
-
-      if (name === 'prod-list') {
-        title.textContent = 'Grupo de Propriedade';
-        fetch('/produtos/')
-          .then(response => response.text())
-          .then(html => { screen.innerHTML = html; })
-          .catch(error => {
-            console.error('Erro ao carregar produtos:', error);
-            screen.innerHTML = '<p>Erro ao carregar produtos.</p>';
-          });
-        return;
-      }
-
-      const screens = {
-        'home': {title:'Início', html:`<h3>Início</h3><p>Conteúdo da tela inicial.</p>`},
-        'prod-create': {title:'Criar Produto', html:`<h3>Criar Produto</h3><p>Formulário de criação.</p>`},
-        'prod-cats': {title:'Categorias', html:`<h3>Categorias</h3><p>Gerencie categorias aqui.</p>`},
-        'profile': {title:'Perfil', html:`<h3>Perfil</h3><p>Dados do usuário.</p>`},
-        'prefs': {title:'Preferências', html:`<h3>Preferências</h3><p>Ajustes do sistema.</p>`},
-        'reports': {title:'Relatórios', html:`<h3>Relatórios</h3><p>Visões e gráficos (placeholder).</p>`}
-      };
-
-      const s = screens[name] || {title:'Tela', html:`<h3>${name}</h3><p>Conteúdo padrão.</p>`};
-      title.textContent = s.title;
-      screen.innerHTML = s.html;
-
-      if(window.innerWidth < 800){ sidebar.classList.add('collapsed'); }
-    }
-
-    window.addEventListener('keydown', e=>{ 
-      if(e.key.toLowerCase()==='m'){ toggleSidebar(); } 
-    });
-  </script>
 </body>
 </html>

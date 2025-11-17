@@ -3,22 +3,6 @@ from django.db import connection
 from django.contrib import messages
 from .models import GrupoPropriedade
 
-def inicio(request):
-    # Pega o usuário da sessão, ou exibe 'Usuário não identificado' se não houver
-    #usuario = request.session.get('usuario', 'Usuário não identificado')
-    # Renderiza a página inicial passando o nome do usuário
-    usuario = request.session.get('usuario', 'Visitante')
-    #usuario = getattr(request, 'usuario_temp', 'Visitante')
-    return render(request, 'telas/inicio.html', {'usuario': usuario})
-
-    #return render(request, 'telas/inicio.html', {'usuario': usuario})
-
-
-def listar_propriedades(request):
-    # Busca todas as propriedades da tabela GrupoPropriedade usando o ORM do Django
-    grupo_propriedade = GrupoPropriedade.objects.all()
-    # Renderiza a página de listagem de propriedades, passando os dados obtidos
-    return render(request, 'telas/lista.html', {'grupo_propriedade': grupo_propriedade})
 
 # def modal_gp(request):
 #     return render(request, 'telas/modal_gp.html')
@@ -62,7 +46,7 @@ def login(request):
             request.session['usuario'] = row[0]
             #request.usuario_temp = row[0]  # só existe nesta requisição
             return inicio(request)  # passa a mesma request
-
+            #return redirect('inicio')
         else:
             
             # Caso não encontre usuário/senha, mostra uma mensagem de erro
@@ -70,8 +54,17 @@ def login(request):
 
     # Caso a requisição seja GET (ou login falhou), renderiza a página de login
     # login.html está direto na pasta templates
+    
     return render(request, 'login.html')
 
 
+def inicio(request):
+    usuario = request.session.get('usuario', 'Visitante')
+    return render(request, 'telas/inicio.html', {'usuario': usuario})
 
 
+def listar_propriedades(request):
+    # Busca todas as propriedades da tabela GrupoPropriedade usando o ORM do Django
+    grupo_propriedade = GrupoPropriedade.objects.all()
+    # Renderiza a página de listagem de propriedades, passando os dados obtidos
+    return render(request, 'telas/lista.html', {'grupo_propriedade': grupo_propriedade})
