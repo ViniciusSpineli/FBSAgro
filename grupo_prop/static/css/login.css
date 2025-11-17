@@ -1,99 +1,113 @@
+/* Aplica estilo global a todos os elementos */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;                      /* Remove margens padrão de todos os elementos */
+  padding: 0;                     /* Remove padding padrão de todos os elementos */
+  box-sizing: border-box;         /* Inclui padding e border na largura e altura dos elementos */
+  font-family: Arial, Helvetica, sans-serif; /* Define a fonte padrão para todo o site */
 }
 
+/* Estilo do corpo da página */
 body {
-  background-color: #008000;
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  background-color: #008000;      /* Cor de fundo verde */
+  color: #fff;                    /* Cor do texto branca */
+  display: flex;                  /* Define layout flexbox para centralizar o conteúdo */
+  justify-content: center;        /* Centraliza horizontalmente */
+  align-items: center;            /* Centraliza verticalmente */
+  height: 100vh;                  /* Altura da tela inteira */
 }
 
+/* Container do login */
 .container {
-  text-align: center;
-  width: 100%;
-  max-width: 400px;
+  text-align: center;             /* Centraliza texto dentro do container */
+  width: 100%;                    /* Ocupa toda a largura disponível */
+  max-width: 400px;               /* Limita a largura máxima do container */
 }
 
+/* Logo */
 .logo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: flex;                  /* Usa flexbox */
+  flex-direction: column;         /* Alinha os elementos em coluna */
+  align-items: center;            /* Centraliza horizontalmente */
 }
 
+/* Imagem do logo */
 .logo img {
-  width: 60%;
-  margin-bottom: 10px;
+  width: 60%;                     /* Largura da imagem em relação ao container */
+  margin-bottom: 10px;            /* Espaço abaixo da imagem */
 }
 
+/* Agrupa cada label e input do formulário */
 .form-group {
-  text-align: left;
-  margin-bottom: 20px;
-  position: relative;
+  text-align: left;               /* Alinha o conteúdo à esquerda */
+  margin-bottom: 20px;            /* Espaço abaixo de cada grupo */
+  position: relative;             /* Necessário para posicionar elementos dentro (como botão de mostrar senha) */
 }
 
+/* Label dos inputs */
 label {
-  display: block;
-  font-size: 16px;
-  margin-bottom: 8px;
+  display: block;                 /* Ocupa a largura total do container */
+  font-size: 16px;                /* Tamanho da fonte */
+  margin-bottom: 8px;             /* Espaço abaixo do label */
 }
 
+/* Input do formulário */
 input {
-  width: 100%;
-  padding: 14px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  outline: none;
-  font-size: 15px;
+  width: 100%;                    /* Ocupa toda a largura do container */
+  padding: 14px;                  /* Espaçamento interno */
+  border: 1px solid #ccc;         /* Borda cinza clara */
+  border-radius: 10px;            /* Bordas arredondadas */
+  outline: none;                  /* Remove contorno padrão ao focar */
+  font-size: 15px;                /* Tamanho da fonte */
 }
 
+/* Input quando em foco */
 input:focus {
-  border-color: #007bff;
+  border-color: #007bff;          /* Altera a cor da borda para azul quando o usuário clica */
 }
 
+/* Container do input de senha */
 .password-container {
-  position: relative;
+  position: relative;             /* Necessário para posicionar o botão de mostrar/ocultar senha */
 }
 
+/* Botão de mostrar/ocultar senha */
 .toggle-password {
-  position: absolute;
-  top: 70%;
-  right: 14px;
-  transform: translateY(-50%);
-  cursor: pointer;
-  color: #666;
-  background: none;
-  border: none;
+  position: absolute;             /* Posição absoluta em relação ao container */
+  top: 70%;                       /* Posição vertical dentro do container */
+  right: 14px;                     /* Distância da direita */
+  transform: translateY(-50%);    /* Ajusta o alinhamento vertical */
+  cursor: pointer;                /* Cursor de mãozinha */
+  color: #666;                     /* Cor cinza do ícone */
+  background: none;               /* Sem fundo */
+  border: none;                   /* Sem borda */
 }
 
+/* Botão de login */
 button.login-btn {
-  width: 100%;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 15px;
-  border-radius: 10px;
-  font-size: 17px;
-  cursor: pointer;
-  transition: background 0.3s ease;
+  width: 100%;                    /* Ocupa toda a largura do container */
+  background-color: #007bff;      /* Cor de fundo azul */
+  color: white;                    /* Cor do texto branca */
+  border: none;                    /* Remove borda padrão */
+  padding: 15px;                   /* Espaçamento interno */
+  border-radius: 10px;             /* Bordas arredondadas */
+  font-size: 17px;                 /* Tamanho da fonte */
+  cursor: pointer;                 /* Cursor de mãozinha */
+  transition: background 0.3s ease;/* Transição suave da cor ao passar o mouse */
 }
 
+/* Efeito hover no botão de login */
 button.login-btn:hover {
-  background-color: #005fc0;
+  background-color: #005fc0;       /* Fica azul mais escuro ao passar o mouse */
 }
 
+/* Mensagem de erro */
 .error-message {
-  color: black;
-  background-color: yellow;
-  border: 1px solid white;
-  padding: 8px;
-  border-radius: 6px;
-  font-size: 13px;
-  margin-top: 6px;
-  display: none;
+  color: black;                    /* Cor do texto preta */
+  background-color: yellow;        /* Fundo amarelo */
+  border: 1px solid white;         /* Borda branca */
+  padding: 8px;                     /* Espaçamento interno */
+  border-radius: 6px;               /* Bordas arredondadas */
+  font-size: 13px;                  /* Tamanho da fonte menor */
+  margin-top: 6px;                  /* Espaço acima da mensagem */
+  display: none;                    /* Inicialmente escondida */
 }

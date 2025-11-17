@@ -1,107 +1,107 @@
 /* Topbar */
 .topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 12px;
+    display: flex;                  /* Define que os elementos filhos ficam em linha (flexbox) */
+    align-items: center;            /* Alinha verticalmente os elementos ao centro */
+    justify-content: space-between; /* Espaça os elementos de forma que fiquem nas extremidades */
+    gap: 12px;                      /* Espaço entre os elementos internos de 12px */
+    margin-bottom: 12px;            /* Espaço abaixo da topbar */
 }
 
 /* Botão novo grupo */
 .btn-novo-grupo {
-    padding: 6px 12px;
-    background: #4CAF50;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    padding: 6px 12px;              /* Espaçamento interno do botão: 6px vertical, 12px horizontal */
+    background: #4CAF50;            /* Cor de fundo verde */
+    color: #fff;                     /* Cor do texto branca */
+    border: none;                    /* Remove borda padrão */
+    border-radius: 4px;              /* Bordas arredondadas de 4px */
+    cursor: pointer;                 /* Cursor muda para mãozinha ao passar o mouse */
 }
 .btn-novo-grupo:hover {
-    background: #3e8e41;
+    background: #3e8e41;             /* Cor de fundo mais escura quando o mouse passa por cima */
 }
 
 /* MODAL */
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
+    position: fixed;                 /* Fica fixo na tela, mesmo quando a página rola */
+    top: 0;                          /* Início no topo da tela */
+    left: 0;                         /* Início na esquerda da tela */
+    width: 100%;                     /* Ocupa toda a largura da tela */
+    height: 100%;                    /* Ocupa toda a altura da tela */
+    background: rgba(0,0,0,0.6);    /* Fundo preto semitransparente */
+    display: none;                   /* Inicialmente escondido */
+    justify-content: center;         /* Centraliza horizontalmente o modal */
+    align-items: center;             /* Centraliza verticalmente o modal */
+    z-index: 9999;                   /* Fica acima de todos os outros elementos da página */
 }
 
 .modal {
-    width: 50%;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    width: 50%;                      /* Largura do modal: metade da tela */
+    background: white;               /* Fundo branco */
+    padding: 20px;                   /* Espaçamento interno de 20px */
+    border-radius: 10px;             /* Bordas arredondadas de 10px */
+    box-shadow: 0 0 15px rgba(0,0,0,0.3); /* Sombra suave ao redor do modal */
 }
 
 .modal h2 {
-    margin-top: 0;
-    margin-bottom: 20px;
+    margin-top: 0;                   /* Remove margem superior */
+    margin-bottom: 20px;             /* Margem inferior de 20px */
 }
 
 .modal label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+    display: block;                  /* Faz o label ocupar a largura inteira da linha */
+    margin-bottom: 5px;              /* Espaço abaixo do label */
+    font-weight: bold;               /* Texto em negrito */
 }
 
 .modal input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    width: 100%;                     /* Input ocupa toda a largura do modal */
+    padding: 8px;                    /* Espaçamento interno */
+    margin-bottom: 15px;             /* Espaço abaixo do input */
+    border: 1px solid #ccc;          /* Borda cinza clara */
+    border-radius: 4px;              /* Bordas arredondadas */
 }
 
 .modal-buttons {
-    text-align: right;
+    text-align: right;               /* Alinha os botões à direita */
 }
 
 .modal-buttons button {
-    padding: 8px 15px;
-    margin-left: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    padding: 8px 15px;               /* Espaçamento interno dos botões */
+    margin-left: 10px;               /* Espaço entre os botões */
+    border: none;                    /* Remove borda padrão */
+    border-radius: 5px;              /* Bordas arredondadas */
+    cursor: pointer;                 /* Cursor de mão ao passar o mouse */
 }
 
 .btn-confirmar {
-    background: #28a745;
-    color: white;
+    background: #28a745;             /* Cor verde para o botão confirmar */
+    color: white;                    /* Texto branco */
 }
 
 .btn-cancelar {
-    background: #dc3545;
-    color: white;
+    background: #dc3545;             /* Cor vermelha para cancelar */
+    color: white;                    /* Texto branco */
 }
 
 /* Tabela */
 .tabela {
-    width: 100%;
-    border-collapse: collapse;
+    width: 100%;                     /* Tabela ocupa toda a largura disponível */
+    border-collapse: collapse;       /* Remove espaçamento entre células da tabela */
 }
 
 .tabela th,
 .tabela td {
-    border: 1px solid #000;
-    padding: 8px;
-    text-align: left;
+    border: 1px solid #000;          /* Bordas pretas em todas as células */
+    padding: 8px;                    /* Espaçamento interno das células */
+    text-align: left;                /* Texto alinhado à esquerda */
 }
 
 .tabela .nenhum {
-    text-align: center;
-    font-style: italic;
+    text-align: center;              /* Texto centralizado */
+    font-style: italic;              /* Texto em itálico */
 }
 
 /* Quando o checkbox estiver marcado → mostra o modal */
 #modal-toggle:checked ~ #modal-overlay {
-    display: flex;
+    display: flex;                   /* Exibe o modal centralizado quando o checkbox estiver marcado */
 }

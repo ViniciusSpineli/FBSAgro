@@ -37,7 +37,7 @@
                 {% csrf_token %}
 
                 <label>Código</label>
-                <input type="text" id="codigo" name="codigo">
+                <input type="text" id="codigo" name="codigo" value="{{ proximo_codigo }}" readonly >
 
                 <label>Descrição</label>
                 <input type="text" id="descricao" name="descricao">

@@ -5,33 +5,32 @@ from django.db.models import Max
 from .models import GrupoPropriedade
 
 
-# def modal_gp(request):
-#     return render(request, 'telas/modal_gp.html')
-
 def login(request):
-    # Verifica se o método da requisição é POST (ou seja, se o formulário foi enviado)
+    # Verifica se a requisição enviada pelo navegador é do tipo POST (ou seja, o usuário enviou o formulário de login)
     if request.method == 'POST':
-        # Pega o valor do campo 'usuario' enviado pelo formulário
+        # Pega o valor do campo 'usuario' enviado pelo formulário HTML
         usuario = request.POST.get('usuario')
-        # Pega o valor do campo 'senha' enviado pelo formulário
+        # Pega o valor do campo 'senha' enviado pelo formulário e converte para maiúsculas
         senha = request.POST.get('senha').upper()
         
+        # Se ambos os campos não foram preenchidos, envia mensagem de erro e retorna a página de login
         if not usuario and not senha: 
             messages.error(request, 'Usuario e senha não preenchido')
             return render(request, 'login.html')
 
+        # Se o campo usuário estiver vazio, envia mensagem de erro e retorna a página de login
         if not usuario:
             messages.error(request, 'O campo usuário não pode estar vazio.')
             return render(request, 'login.html')
         
+        # Se o campo senha estiver vazio, envia mensagem de erro e retorna a página de login
         if not senha:
             messages.error(request, 'O campo senha não pode estar vazio.')
             return render(request, 'login.html')
 
-
-        # Abre um cursor para executar SQL diretamente no banco de dados
+        # Abre um cursor para executar comandos SQL diretamente no banco de dados Oracle
         with connection.cursor() as cursor:
-            # Executa uma consulta SQL para verificar se existe um usuário com o login e senha informados
+            # Executa a consulta SQL para verificar se existe um usuário com o login e senha fornecidos
             cursor.execute("""
                 SELECT COD_USUARIO, DES_USUARIO
                   FROM TAB_USUARIO
@@ -39,28 +38,29 @@ def login(request):
                    AND SENHA_USUARIO = PCK_CONTROLE_ACESSO_UTIL.FUN_ENCRYPT(:senha)
             """, {'usuario': usuario, 'senha': senha})
 
-            # Retorna a primeira linha encontrada na consulta (ou None se não existir)
+            # Retorna a primeira linha do resultado da consulta (ou None caso não exista)
             row = cursor.fetchone()
-        # Verifica se a consulta retornou algum resultado (usuário válido)
+        
+        # Se a consulta encontrou um usuário válido
         if row:
-            
+            # Armazena o código do usuário na sessão para que possa ser usado em outras páginas
             request.session['usuario'] = row[0]
-            #request.usuario_temp = row[0]  # só existe nesta requisição
-            return inicio(request)  # passa a mesma request
-            #return redirect('inicio')
+            #request.usuario_temp = row[0]  # Comentado: só existiria durante esta requisição
+            # Retorna a página inicial já logado, passando a mesma request
+            return inicio(request)  # opcionalmente poderia usar redirect('inicio')
         else:
-            
-            # Caso não encontre usuário/senha, mostra uma mensagem de erro
+            # Caso o login seja inválido, adiciona uma mensagem de erro para ser exibida no template
             messages.error(request, 'Usuário ou senha inválidos.')
 
-    # Caso a requisição seja GET (ou login falhou), renderiza a página de login
-    # login.html está direto na pasta templates
-    
+    # Caso a requisição seja GET (ou seja, apenas acessou a página) ou login falhou
+    # Renderiza a página de login normalmente
     return render(request, 'login.html')
 
 
 def inicio(request):
+    # Recupera o usuário logado da sessão. Se não existir, retorna 'Visitante'
     usuario = request.session.get('usuario', 'Visitante')
+    # Renderiza a página inicial passando o nome do usuário como contexto para o template
     return render(request, 'telas/inicio.html', {'usuario': usuario})
 
 
@@ -68,12 +68,17 @@ def listar_propriedades(request):
     # Busca todas as propriedades da tabela GrupoPropriedade usando o ORM do Django
     grupo_propriedade = GrupoPropriedade.objects.all()
     
+    # Calcula o próximo código disponível da propriedade
+    # Primeiro, obtém o maior código já existente na tabela
     max_codigo = GrupoPropriedade.objects.aggregate(Max('cod_grupo_propriedade'))['cod_grupo_propriedade__max']
+    # Incrementa 1 para gerar o próximo código, se não houver registros, começa com 1
     proximo_codigo = (max_codigo or 0) + 1
     
+    # Prepara o contexto para enviar ao template
     context = {
-        'grupo_propriedade': grupo_propriedade,
-        'proximo_codigo': proximo_codigo
+        'grupo_propriedade': grupo_propriedade,  # lista de todos os grupos
+        'proximo_codigo': proximo_codigo         # próximo código disponível
     }
 
+    # Renderiza o template 'lista.html' e passa o contexto
     return render(request, 'telas/lista.html', context)

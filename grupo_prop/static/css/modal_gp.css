@@ -1,68 +1,77 @@
+/* Overlay do modal */
 .gp-overlay {
-    position: fixed;
-    inset: 0;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0,0,0,0.6);
-    z-index: 9999;
+    position: fixed;                /* Fixa o overlay em relação à tela inteira */
+    inset: 0;                        /* Define top, right, bottom e left = 0 (ocupa toda a tela) */
+    display: none;                   /* Inicialmente escondido */
+    justify-content: center;         /* Centraliza o conteúdo horizontalmente */
+    align-items: center;             /* Centraliza o conteúdo verticalmente */
+    background: rgba(0,0,0,0.6);    /* Fundo semitransparente preto */
+    z-index: 9999;                   /* Garante que fique acima de todos os outros elementos */
 }
 
+/* Mostra o overlay quando a classe 'show' é adicionada */
 .gp-overlay.show {
-    display: flex;
+    display: flex;                   /* Torna visível e aplica flexbox para centralizar o modal */
 }
 
+/* Estilo da caixa do modal */
 .gp-modal {
-    background: #fff;
-    padding: 20px;
-    width: 40%;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    background: #fff;                 /* Fundo branco */
+    padding: 20px;                    /* Espaçamento interno */
+    width: 40%;                        /* Largura do modal */
+    border-radius: 10px;              /* Bordas arredondadas */
+    box-shadow: 0 0 20px rgba(0,0,0,0.3); /* Sombra ao redor do modal */
 }
 
+/* Título do modal */
 .gp-modal h2 {
-    margin-top: 0;
+    margin-top: 0;                    /* Remove margem superior padrão */
 }
 
+/* Container dos botões do modal */
 .gp-buttons {
-    margin-top: 20px;
-    display: flex;
-    justify-content: end;
-    gap: 10px;
+    margin-top: 20px;                 /* Espaço acima dos botões */
+    display: flex;                     /* Flexbox para alinhar os botões */
+    justify-content: end;              /* Alinha os botões à direita */
+    gap: 10px;                         /* Espaço entre os botões */
 }
 
+/* Botão de cancelar */
 .gp-cancelar {
-    background: #dc3545;
-    border: none;
-    padding: 8px 14px;
-    color: white;
-    cursor: pointer;
-    border-radius: 4px;
+    background: #dc3545;               /* Fundo vermelho */
+    border: none;                      /* Sem borda */
+    padding: 8px 14px;                 /* Espaçamento interno */
+    color: white;                      /* Cor do texto branca */
+    cursor: pointer;                   /* Cursor de mãozinha */
+    border-radius: 4px;                /* Bordas levemente arredondadas */
 }
 
+/* Botão de confirmar */
 .gp-confirmar {
-    background: #28a745;
-    border: none;
-    padding: 8px 14px;
-    color: white;
-    cursor: pointer;
-    border-radius: 4px;
+    background: #28a745;               /* Fundo verde */
+    border: none;                      /* Sem borda */
+    padding: 8px 14px;                 /* Espaçamento interno */
+    color: white;                      /* Cor do texto branca */
+    cursor: pointer;                   /* Cursor de mãozinha */
+    border-radius: 4px;                /* Bordas levemente arredondadas */
 }
 
+/* Formulário dentro do modal */
 .gp-modal form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    display: flex;                     /* Flexbox para organizar os campos */
+    flex-direction: column;            /* Campos empilhados verticalmente */
+    gap: 15px;                         /* Espaçamento entre os campos */
 }
 
+/* Linha de campos no modal (para colocar mais de um campo na mesma linha) */
 .gp-row {
-    display: flex;
-    gap: 16px; /* espaçamento entre os campos */
+    display: flex;                     /* Flexbox para alinhar os campos horizontalmente */
+    gap: 16px;                         /* Espaçamento entre os campos */
 }
 
+/* Cada campo individual dentro de gp-row */
 .gp-field {
-    display: flex;
-    flex-direction: column;
-    flex: 1; /* ocupa o mesmo tamanho */
+    display: flex;                     /* Flexbox para empilhar label e input verticalmente */
+    flex-direction: column;            /* Label acima do input */
+    flex: 1;                           /* Todos os campos dentro da mesma linha ocupam o mesmo tamanho */
 }
-
