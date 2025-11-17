@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.db import connection
 from django.contrib import messages
+from django.db.models import Max
 from .models import GrupoPropriedade
 
 
@@ -66,5 +67,13 @@ def inicio(request):
 def listar_propriedades(request):
     # Busca todas as propriedades da tabela GrupoPropriedade usando o ORM do Django
     grupo_propriedade = GrupoPropriedade.objects.all()
-    # Renderiza a página de listagem de propriedades, passando os dados obtidos
-    return render(request, 'telas/lista.html', {'grupo_propriedade': grupo_propriedade})
+    
+    max_codigo = GrupoPropriedade.objects.aggregate(Max('cod_grupo_propriedade'))['cod_grupo_propriedade__max']
+    proximo_codigo = (max_codigo or 0) + 1
+    
+    context = {
+        'grupo_propriedade': grupo_propriedade,
+        'proximo_codigo': proximo_codigo
+    }
+
+    return render(request, 'telas/lista.html', context)

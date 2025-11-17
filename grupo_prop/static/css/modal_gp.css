@@ -1,0 +1,68 @@
+.gp-overlay {
+    position: fixed;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.6);
+    z-index: 9999;
+}
+
+.gp-overlay.show {
+    display: flex;
+}
+
+.gp-modal {
+    background: #fff;
+    padding: 20px;
+    width: 40%;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+.gp-modal h2 {
+    margin-top: 0;
+}
+
+.gp-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+}
+
+.gp-cancelar {
+    background: #dc3545;
+    border: none;
+    padding: 8px 14px;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.gp-confirmar {
+    background: #28a745;
+    border: none;
+    padding: 8px 14px;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.gp-modal form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.gp-row {
+    display: flex;
+    gap: 16px; /* espaçamento entre os campos */
+}
+
+.gp-field {
+    display: flex;
+    flex-direction: column;
+    flex: 1; /* ocupa o mesmo tamanho */
+}
+
