@@ -1,86 +1,87 @@
-/* Overlay do modal */
+/* Overlay do modal: Estiliza o fundo semitransparente que cobre a tela */
 .gp-overlay {
-    position: fixed;                /* Fixa o overlay em relação à tela inteira */
-    inset: 0;                        /* Define top, right, bottom e left = 0 (ocupa toda a tela) */
-    display: none;                   /* Inicialmente escondido */
-    justify-content: center;         /* Centraliza o conteúdo horizontalmente */
-    align-items: center;             /* Centraliza o conteúdo verticalmente */
-    background: rgba(0,0,0,0.6);    /* Fundo semitransparente preto */
-    z-index: 9999;                   /* Garante que fique acima de todos os outros elementos */
+    position: fixed;                 /* Fixa o overlay em relação à janela de visualização (viewport) */
+    inset: 0;                        /* Atalho para definir top: 0, right: 0, bottom: 0 e left: 0 (ocupa toda a tela) */
+    display: none;                   /* Inicialmente o overlay está escondido (não visível) */
+    justify-content: center;         /* Centraliza o conteúdo filho (o modal) horizontalmente (eixo X) */
+    align-items: center;             /* Centraliza o conteúdo filho (o modal) verticalmente (eixo Y) */
+    background: rgba(0,0,0,0.6);     /* Define o fundo como preto com 60% de opacidade (semitransparente) */
+    z-index: 9999;                   /* Define uma alta ordem de empilhamento, garantindo que o overlay fique acima de quase tudo */
 }
 
-/* Mostra o overlay quando a classe 'show' é adicionada */
+/* Mostra o overlay quando a classe 'show' é adicionada (normalmente via JavaScript) */
 .gp-overlay.show {
-    display: flex;                   /* Torna visível e aplica flexbox para centralizar o modal */
+    display: flex;                   /* Altera o display de 'none' para 'flex', tornando o overlay visível e aplicando a centralização */
 }
 
-/* Estilo da caixa do modal */
+/* Estilo da caixa do modal (o conteúdo que aparece centralizado) */
 .gp-modal {
-    background: #fff;                 /* Fundo branco */
-    padding: 20px;                    /* Espaçamento interno */
-    width: 40%;                        /* Largura do modal */
-    border-radius: 10px;              /* Bordas arredondadas */
-    box-shadow: 0 0 20px rgba(0,0,0,0.3); /* Sombra ao redor do modal */
+    background: #fff;                /* Cor de fundo branca */
+    padding: 20px;                   /* Espaçamento interno de 20px em todos os lados */
+    width: 40%;                      /* Define a largura do modal como 40% da largura da tela/viewport */
+    border-radius: 10px;             /* Bordas arredondadas com raio de 10px */
+    box-shadow: 0 0 20px rgba(0,0,0,0.3); /* Aplica uma sombra ao redor do modal (deslocamento 0, blur 20px, cor preta com 30% de opacidade) */
 }
 
-/* Título do modal */
+/* Título (h2) dentro do modal */
 .gp-modal h2 {
-    margin-top: 0;                    /* Remove margem superior padrão */
+    margin-top: 0;                   /* Remove a margem superior padrão do título */
 }
 
 /* Container dos botões do modal */
 .gp-buttons {
-    margin-top: 20px;                 /* Espaço acima dos botões */
-    display: flex;                     /* Flexbox para alinhar os botões */
-    justify-content: end;              /* Alinha os botões à direita */
-    gap: 10px;                         /* Espaço entre os botões */
+    margin-top: 20px;                /* Espaço de 20px acima do container para separar do formulário */
+    display: flex;                   /* Habilita o layout flexbox para alinhar os botões */
+    justify-content: flex-end;       /* Alinha os botões filhos à direita (fim do eixo principal) */
+    gap: 10px;                       /* Espaço de 10px entre os botões */
 }
 
 /* Botão de cancelar */
 .gp-cancelar {
-    background: #dc3545;               /* Fundo vermelho */
-    border: none;                      /* Sem borda */
-    padding: 8px 14px;                 /* Espaçamento interno */
-    color: white;                      /* Cor do texto branca */
-    cursor: pointer;                   /* Cursor de mãozinha */
-    border-radius: 4px;                /* Bordas levemente arredondadas */
+    background: #dc3545;             /* Cor de fundo vermelha (padrão para ações negativas/cancelamento) */
+    border: none;                    /* Remove a borda padrão do botão */
+    padding: 8px 14px;               /* Espaçamento interno: 8px vertical e 14px horizontal */
+    color: white;                    /* Cor do texto branca */
+    cursor: pointer;                 /* Altera o cursor para o ícone de "mãozinha" */
+    border-radius: 4px;              /* Bordas levemente arredondadas de 4px */
 }
 
 /* Botão de confirmar */
 .gp-confirmar {
-    background: #28a745;               /* Fundo verde */
-    border: none;                      /* Sem borda */
-    padding: 8px 14px;                 /* Espaçamento interno */
-    color: white;                      /* Cor do texto branca */
-    cursor: pointer;                   /* Cursor de mãozinha */
-    border-radius: 4px;                /* Bordas levemente arredondadas */
+    background: #28a745;             /* Cor de fundo verde (padrão para ações positivas/confirmação) */
+    border: none;                    /* Remove a borda padrão do botão */
+    padding: 8px 14px;               /* Espaçamento interno: 8px vertical e 14px horizontal */
+    color: white;                    /* Cor do texto branca */
+    cursor: pointer;                 /* Altera o cursor para o ícone de "mãozinha" */
+    border-radius: 4px;              /* Bordas levemente arredondadas de 4px */
 }
 
 /* Formulário dentro do modal */
 .gp-modal form {
-    display: flex;                     /* Flexbox para organizar os campos */
-    flex-direction: column;            /* Campos empilhados verticalmente */
-    gap: 15px;                         /* Espaçamento entre os campos */
+    display: flex;                   /* Habilita o layout flexbox para organizar os campos */
+    flex-direction: column;          /* Organiza os campos em uma coluna, empilhados verticalmente */
+    gap: 15px;                       /* Espaçamento de 15px entre os campos/linhas do formulário */
 }
 
-/* Linha de campos no modal (para colocar mais de um campo na mesma linha) */
+/* Linha de campos no modal (para agrupar campos lado a lado) */
 .gp-row {
-    display: flex;           /* Coloca os campos lado a lado */
-    gap: 16px;               /* Espaçamento entre os campos */
+    display: flex;                   /* Habilita o flexbox para colocar os campos filhos lado a lado */
+    gap: 16px;                       /* Espaçamento de 16px entre os campos dentro da linha */
 }
 
-/* Campo individual dentro da linha */
+/* Campo individual dentro da linha (contêiner de label e input) */
 .gp-field {
-    display: flex;
-    flex-direction: column;  /* Label acima do input */
+    display: flex;                   /* Habilita o flexbox */
+    flex-direction: column;          /* Organiza o label acima do input (em uma coluna) */
 }
 
-/* Diminuir largura do campo Código */
+/* Diminuir largura do campo Código (Ajuste específico de largura) */
 .gp-field.gp-codigo {
-    flex: 0 0 10px;         /* largura fixa de 100px */
+    /* flex: grow shrink basis. grow:0 (não cresce), shrink:0 (não encolhe), basis:10px (base de 10px, que o flexbox pode não respeitar estritamente dependendo da implementação original) */
+    flex: 0 0 100px;                 /* Estava 10px, mas 100px faz mais sentido para uma largura fixa de campo. Define uma largura base de 100px, impedindo que cresça ou encolha */
 }
 
-/* Campo Descrição ocupa o restante */
+/* Campo Descrição ocupa o restante (Ajuste específico de largura) */
 .gp-field.gp-descricao {
-    flex: 1;                 /* ocupa o restante da linha */
+    flex: 1;                         /* Ocupa todo o espaço restante disponível na linha (faz o campo crescer para preencher o espaço) */
 }

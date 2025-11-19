@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    console.log('teste 2 ');
+
     const modal = document.getElementById("modal-gp-overlay");
 
     // Abrir o modal

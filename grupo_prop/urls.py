@@ -13,4 +13,6 @@ urlpatterns = [
     path('inicio/', views.inicio, name='inicio'),
     path('produtos/', views.listar_propriedades, name='lista_grupo'),
     path('grupo_prop/add/', views.add_grupo, name='add_grupo'),
+    path('delete-grupo/<int:grupo_id>/', views.delete_grupo, name='delete_grupo'),
+
 ]

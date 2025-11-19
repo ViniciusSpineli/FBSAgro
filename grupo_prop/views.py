@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.db import connection
 from django.contrib import messages
 from django.db.models import Max
@@ -66,7 +66,7 @@ def inicio(request):
 
 def listar_propriedades(request):
     # Busca todas as propriedades da tabela GrupoPropriedade usando o ORM do Django
-    grupo_propriedade = GrupoPropriedade.objects.all()
+    grupo_propriedade = GrupoPropriedade.objects.all().order_by('cod_grupo_propriedade')
     
     # Calcula o próximo código disponível da propriedade
     # Primeiro, obtém o maior código já existente na tabela
@@ -105,12 +105,26 @@ def add_grupo(request):
                     "descricao": descricao
                 })
 
-            messages.success(request, "Grupo cadastrado com sucesso!")
+            messages.success(request, "abrir_lista")
             return redirect("inicio")
 
         except Exception as e:
             messages.error(request, f"Erro ao inserir grupo: {e}")
             return redirect("inicio")
 
+def delete_grupo(request, grupo_id):
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("""
+                DELETE FROM TAB_GRUPO_PROPRIEDADE
+                WHERE COD_GRUPO_PROPRIEDADE = :grupo_id
+            """, {
+                "grupo_id": grupo_id
+            })
 
+        messages.success(request, "abrir_lista")
+        
+    except Exception as e:
+        messages.error(request, f"Erro ao excluir o grupo: {e}")
 
+    return redirect('inicio')

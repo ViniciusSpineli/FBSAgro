@@ -12,6 +12,11 @@
     <link rel="stylesheet" href="{% static 'css/modal_gp.css' %}">
 
     <!-- Scripts -->
+     <script>
+        // gera exemplo: "/delete-grupo/0/" e remove o zero
+        window.DELETE_URL_BASE = "/delete-grupo/";
+    </script>
+
     <script src="{% static 'js/lista.js' %}" defer></script>
 </head>
 
@@ -41,20 +46,19 @@
               </div>
             {% endif %}
 
-
             <form method="POST" action="{% url 'add_grupo' %}">
                 {% csrf_token %}
 
-                 <div class="gp-row">
-                    <div class="gp-field gp-codigo">
-                        <!--label for="codigo">Código</label style="display: none;"-->
-                        <input type="text" id="codigo" name="codigo" value="{{ proximo_codigo }}" readonly style="display: none;">
-                    </div>
+                <div class="gp-row">
+
+                    <!-- Código escondido corretamente -->
+                    <input type="hidden" id="codigo" name="codigo" value="{{ proximo_codigo }}">
 
                     <div class="gp-field gp-descricao">
                         <label for="descricao">Descrição</label>
                         <input type="text" id="descricao" name="descricao" style="text-transform: uppercase;">
                     </div>
+
                 </div>
 
                 <div class="gp-buttons">
@@ -70,55 +74,43 @@
     <!-- TABELA -->
     <table class="tabela">
         <tr class="labels">
-            <th></th>
-            <th class="codigo">Código</th>
-            <th class="desc">Descrição</th>
+          <th></th>
+          <th>Código</th>
+          <th>Descrição</th>
         </tr>
 
         {% for p in grupo_propriedade %}
         
-        <tr class="lista">
-          <td>
-            <button class="excluir-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" height="24px" 
-                   viewBox="0 -960 960 960" width="24px" fill="#000000">
-                   <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
-            </button>
-          </td>
-          <td class="codigo">{{ p.cod_grupo_propriedade }}</td>
-          <td class="desc" style="text-transform: uppercase;">{{ p.des_grupo_propriedade }}</td>
-        </tr>
+            <tr class="lista">
+                <td>
+                    <button class="botao_excluir" data-id="{{ p.cod_grupo_propriedade }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" 
+                            viewBox="0 -960 960 960" width="24px" fill="#000000">
+                            <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/>
+                        </svg>
+                    </button>
+                </td>
+                <td>{{ p.cod_grupo_propriedade }}</td>
+                <td style="text-transform: uppercase;">{{ p.des_grupo_propriedade }}</td>
+            </tr>
         
         {% empty %}
         <tr>
-            <td colspan="2" class="nenhum">Nenhum grupo encontrado.</td>
+            <td colspan="3" class="nenhum">Nenhum grupo encontrado.</td>
         </tr>
         {% endfor %}
     </table>
 
-{% if messages %}
-    <script>
-        // Verifica se alguma mensagem é de erro
-        let temErro = false;
 
+    {% if messages %}
+    <div id="mensagens" style="padding: 10px; margin-bottom: 15px;">
         {% for m in messages %}
-            {% if m.tags == "error" %}
-                temErro = true;
-            {% endif %}
+            <div class="alert {{ m.tags }}">
+                {{ m }}
+            </div>
         {% endfor %}
-
-        // Se tiver erro, abre o modal automaticamente
-        if (temErro) {
-            document.addEventListener("DOMContentLoaded", function () {
-                let modal = document.getElementById("modalNovoGrupo");
-                if (modal) {
-                    modal.style.display = "block"; // depende do seu modal
-                }
-            });
-        }
-    </script>
-{% endif %}
-
+    </div>
+    {% endif %}
 
 </body>
 

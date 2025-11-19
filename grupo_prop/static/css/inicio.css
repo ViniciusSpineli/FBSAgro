@@ -1,92 +1,91 @@
 :root{
-  --sidebar-collapsed-width:60px;
-  --sidebar-expanded-width:240px;
-  --transition:0.28s;
-  --bg:#0f172a;
-  --panel:#0b1220;
-  --accent:#4f46e5;
-  --muted:#9aa4b2;
+  --sidebar-collapsed-width:60px; /* Largura da sidebar quando recolhida */
+  --sidebar-expanded-width:240px; /* Largura da sidebar quando expandida */
+  --transition:0.28s; /* Tempo padrão de transição */
+  --bg:#0f172a; /* Cor de fundo geral (não usada aqui, mas definida para consistência) */
+  --panel:#0b1220; /* Cor padrão de painéis */
+  --accent:#4f46e5; /* Cor de destaque */
+  --muted:#9aa4b2; /* Cor para textos apagados */
 }
 
 *{
-  box-sizing:border-box;
-  font-family: "Stack Sans Text", sans-serif;
-  /*font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, 'Helvetica Neue', Arial;*/
+  box-sizing:border-box; /* Inclui bordas no cálculo total de width/height */
+  font-family: "Stack Sans Text", sans-serif; /* Fonte padrão */
 }
 
 body{
-  margin:0;
-  background:linear-gradient(180deg,#ffffff 100%, #071427 0%);
-  color:#0b1220;
-  height:100vh;
-  display:flex;
+  margin:0; /* Remove margem padrão */
+  background:linear-gradient(180deg,#ffffff 100%, #071427 0%); /* Gradiente de fundo */
+  color:#0b1220; /* Cor padrão do texto */
+  height:100vh; /* Ocupa altura inteira da tela */
+  display:flex; /* Permite layout com sidebar + conteúdo */
 }
 
-/* SIDEBAR */
+/* ========================= SIDEBAR ============================== */
 .sidebar{
-  width:var(--sidebar-expanded-width);
-  background-color:#189117;
-  padding:12px;
-  display:flex; 
+  width:var(--sidebar-expanded-width); /* Largura padrão */
+  background-color:#189117; /* Cor verde da sidebar */
+  padding:12px; /* Espaçamento interno */
+  display:flex;  /* Itens em coluna */
   flex-direction:column;
-  gap:8px;
-  transition:width var(--transition) ease;
-  overflow:hidden;
-  color:white;
+  gap:8px; /* Espaço entre os elementos */
+  transition:width var(--transition) ease; /* Animação ao colapsar */
+  overflow:hidden; /* Esconde conteúdo quando colapsada */
+  color:white; /* Cor padrão do texto */
 }
 
 .sidebar.collapsed{
-  width:var(--sidebar-collapsed-width);
+  width:var(--sidebar-collapsed-width); /* Sidebar recolhida */
 }
 
 .brand{
-  display:flex;
+  display:flex; /* Coloca logo ao lado de textos (se houver) */
   align-items:center;
   gap:10px;
-  padding:8px 6px;
+  padding:8px 6px; /* Espaçamento interno */
 }
 
 .brand .logo{
-  width:90%;
-  height:200px;
-  border-radius:8px;
+  width:90%; /* Largura da área do logo */
+  height:200px; /* Altura fixa */
+  border-radius:8px; /* Cantos arredondados */
   display:flex;
   align-items:center;
   justify-content:center;
-  font-weight:700;
+  font-weight:700; /* Peso do texto caso haja */
 }
 
 .brand .logo img{
-  width:100%;
+  width:100%; /* Imagem ocupa toda área */
   height:100%;
   border-radius:5px;
-  object-fit: contain;
+  object-fit: contain; /* Mantém proporção sem cortar */
 }
 
 .menu{
-  flex:1;
-  overflow:auto;
-  padding-right:6px;
+  flex:1; /* Menu ocupa toda área restante */
+  overflow:auto; /* Ativa scroll caso ultrapasse */
+  padding-right:6px; /* Espaço para não colar na borda */
 }
 
 .menu-item{
-  display:flex;
+  display:flex; /* Ícone + texto alinhados */
   align-items:center;
-  justify-content:space-between;
+  justify-content:space-between; /* Texto à esquerda, seta à direita */
   padding:10px;
   border-radius:8px;
   cursor:pointer;
-  user-select:none;
+  user-select:none; /* Impede selecionar texto acidentalmente */
 }
 
 .menu-item:hover{
-  background:rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.1); /* Hover suave */
 }
 
 .menu-item .label{
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:10px; /* Espaço entre ícone e texto */
 }
 
 .menu-item .icon{
@@ -96,14 +95,14 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  background:rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.1); /* Fundo translúcido */
 }
 
-/* SUBMENUS */
+/* ========================= SUBMENUS ============================== */
 .submenu{
-  margin-top:6px;
-  padding-left:44px;
-  display:none;
+  margin-top:6px; /* Espaço acima do submenu */
+  padding-left:44px; /* Indentação */
+  display:none; /* Começa escondido */
   flex-direction:column;
   gap:6px;
 }
@@ -111,41 +110,45 @@ body{
 .submenu a{
   padding:8px;
   border-radius:6px;
-  text-decoration:none;
+  text-decoration:none; /* Remove underline */
   color:white;
   font-size:14px;
 }
 
 .submenu a:hover{
-  background:rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.1); /* Hover igual ao menu principal */
 }
 
 .arrow{
-  transition:transform var(--transition) ease;
+  transition:transform var(--transition) ease; /* Animação ao girar seta */
 }
 
 .menu-item.open .arrow{
-  transform:rotate(90deg);
+  transform:rotate(90deg); /* Gira a seta ao abrir submenu */
 }
 
-/* CONTENT */
+/* ========================= MAIN CONTENT ============================== */
 .main{
-  flex:1;
+  flex:1; /* Ocupa todo espaço ao lado da sidebar */
   padding:18px;
-  overflow:auto;
+  overflow:auto; /* Scroll se necessário */
 }
 
 .card{
-  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  background:linear-gradient(
+    180deg, 
+    rgba(255,255,255,0.02), 
+    rgba(255,255,255,0.01)
+  ); /* Painel com leve gradiente */
   padding:18px;
-  border-radius:12px;
-  box-shadow:0 6px 20px rgba(2,6,23,0.6);
+  border-radius:12px; /* Cantos arredondados */
+  box-shadow:0 6px 20px rgba(2,6,23,0.6); /* Sombra bonita */
 }
 
 .topbar{
   display:flex;
   align-items:center;
-  justify-content:space-between;
+  justify-content:space-between; /* Título à esquerda, usuário à direita */
   gap:12px;
   margin-bottom:12px;
 }
@@ -154,57 +157,57 @@ body{
   font-weight:600;
   color:#000;
   display:flex;
-  gap:12px;
+  gap:12px; /* Espaço entre texto e ícone */
 }
 
 .toggle-btn{
   background:transparent;
-  border:1px solid rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.04); /* Borda suave */
   padding:8px;
   border-radius:10px;
   cursor:pointer;
 }
 
+/* ========================= RESPONSIVIDADE ============================== */
 @media (max-width:800px){
   .sidebar{
-    position:absolute;
-    z-index:40;
+    position:absolute; /* Sidebar sobre o conteúdo */
+    z-index:40; /* Fica por cima */
     height:100vh;
     left:0;
     top:0;
   }
 }
 
-/* HIDES CONTENT WHEN COLLAPSED */
+/* ========================= OCULTA ITENS AO COLAPSAR ============================== */
 .sidebar.collapsed .brand h1, 
 .sidebar.collapsed .menu-item .text, 
 .sidebar.collapsed .submenu{
-  display:none;
+  display:none; /* Esconde textos e submenus */
 }
 
 .sidebar.collapsed .menu-item {
-  justify-content:center;
+  justify-content:center; /* Centraliza ícones */
 }
 
-/* LOGOUT BUTTON */
+/* ========================= BOTÃO DE SAIR ============================== */
 .logout-btn {
-  background:#ffffff;
-  color:#189117;
+  background:#ffffff; /* Fundo branco */
+  color:#189117; /* Verde do tema */
   border:none;
   border-radius:8px;
   padding:10px;
   width:100%;
   cursor:pointer;
   font-weight:600;
-  transition:background 0.2s ease;
+  transition:background 0.2s ease; /* Animação do hover */
 }
 
 .logout-btn:hover {
-  background:#d1ffd1;
+  background:#d1ffd1; /* Verde claro no hover */
 }
 
 .left {
     display: flex;
-    align-items: center;
-    
+    align-items: center; /* Alinha verticalmente os itens */
 }

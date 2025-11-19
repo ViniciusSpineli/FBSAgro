@@ -1,79 +1,74 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="pt-BR">
+{% load static %} <!-- Carrega a tag 'static' do Django para permitir uso de arquivos estáticos (CSS, JS, imagens) -->
 
+<!DOCTYPE html> <!-- Define que o documento segue o padrão HTML5 -->
+<html lang="pt-BR"> <!-- Define o idioma da página como português do Brasil -->
 
-
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>FBS Agro</title>
+<head> <!-- Cabeçalho do documento, contém metadados e links -->
+    <meta charset="UTF-8"> <!-- Define a codificação de caracteres como UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Garante responsividade em dispositivos móveis -->
+    <title>FBS Agro</title> <!-- Título da aba do navegador -->
 
     <!-- CSS -->
-    <link rel="stylesheet" href="{% static 'css/inicio.css' %}">
+    <link rel="stylesheet" href="{% static 'css/inicio.css' %}"> <!-- Importa o CSS principal usando arquivos estáticos -->
 </head>
 
-<body data-page="inicio">
+<body data-page="inicio"> <!-- Corpo da página e atributo personalizado para JS -->
 
-{% if erro_modal %}
+{% if erro_modal %} <!-- Se houver erro no modal, executa o script abaixo -->
     <script>
-        window.onload = function() {
-            document.getElementById("modal-overlay").style.display = "flex";
+        window.onload = function() { <!-- Quando a página carregar... -->
+            document.getElementById("modal-overlay").style.display = "flex"; <!-- Abre o modal automaticamente -->
         }
     </script>
 {% endif %}
 
 <!-- SIDEBAR -->
-<aside class="sidebar" id="sidebar">
+<aside class="sidebar" id="sidebar"> <!-- Barra lateral fixa -->
 
-    <div class="brand">
-        <div class="logo">
-            <img src="{% static 'img/logo FBS AGRO.png' %}" alt="logo">
+    <div class="brand"> <!-- Área da marca -->
+        <div class="logo"> <!-- Container do logo -->
+            <img src="{% static 'img/logo FBS AGRO.png' %}" alt="logo"> <!-- Imagem do logo -->
         </div>
     </div>
 
-    <nav class="menu">
-        <div class="menu-group">
+    <nav class="menu"> <!-- Menu principal da sidebar -->
+        <div class="menu-group"> <!-- Grupo de itens -->
 
             <!-- INÍCIO -->
-            <div class="menu-item" onclick="showScreen('home')">
-                <div class="label">
-                    <div class="icon">
+            <div class="menu-item" onclick="showScreen('home')"> <!-- Item que abre a tela 'home' -->
+                <div class="label"> <!-- Container da label -->
+                    <div class="icon"> <!-- Ícone do menu -->
                         <svg xmlns="http://www.w3.org/2000/svg" height="48px" 
-                             viewBox="0 -960 960 960" width="48px" fill="#FFFFFF">
-                             <path d="M225.39-185.39h155.76v-244.99h197.7v244.99h155.76v-381.92L480-759.23 225.39-567.44v382.05ZM180-140v-450l300-225.77L780-590v450H533.46v-245H426.54v245H180Zm300-332.62Z"/>
+                             viewBox="0 -960 960 960" width="48px" fill="#FFFFFF"> <!-- SVG do ícone -->
+                             <path d="M225.39-185.39h155.76v-244.99h197.7v244.99h155.76v-381.92L480-759.23 225.39-567.44v382.05ZM180-140v-450l300-225.77L780-590v450H533.46v-245H426.54v245H180Zm300-332.62Z"/> <!-- Caminho do desenho -->
                         </svg>
-
                     </div>
-                    <div class="text">Início</div>
+                    <div class="text">Início</div> <!-- Texto do menu -->
                 </div>
             </div>
 
             <!-- CADASTROS -->
-            <div class="menu-item" onclick="toggleSub('m1')">
+            <div class="menu-item" onclick="toggleSub('m1')"> <!-- Abre submenu com id m1 -->
                 <div class="label">
-                    <div class="icon">
+                    <div class="icon"> <!-- Ícone -->
                         <svg xmlns="http://www.w3.org/2000/svg" height="48px" 
                              viewBox="0 -960 960 960" width="48px" fill="#FFFFFF">
                              <path d="M247.77-372.23h346.15l45.39-45.38H247.77v45.38Zm0-173h213.31v-45.38H247.77v45.38ZM145.39-694.61V-266h342.3l-46 46H100v-520h760v147.08h-45.39v-101.69H145.39Zm743.07 210.76q4.61 4.44 4.61 11.35 0 6.91-4.61 11.35l-34.69 34.69-36.16-36.15 36.02-36.02q4.52-4.52 9.77-4.52 5.26 0 9.98 4.61l15.08 14.69Zm-355 342.31v-36.15l259.69-259.69 36.16 36.15-259.7 259.69h-36.15ZM145.39-694.61V-266v-428.61Z"/>
                         </svg>
                     </div>
-                    <div class="text">Cadastros</div>
+                    <div class="text">Cadastros</div> <!-- Nome da seção -->
                 </div>
-                <div class="arrow">›</div>
+                <div class="arrow">›</div> <!-- Setinha indicadora -->
             </div>
 
-            <div class="submenu {% if submenu_aberto == 'cadastro_propriedades' %}open{% endif %}" id="m1">
-            <!--div class="submenu" id="m1"-->
-                <a href="#" onclick="showScreen('prod-list')">Grupo de Propriedade</a>
-                
+            <div class="submenu {% if submenu_aberto == 'cadastro_propriedades' %}open{% endif %}" id="m1"> <!-- Submenu condicionalmente aberto -->
+                <a href="#" onclick="showScreen('prod-list')">Grupo de Propriedade</a> <!-- Link que troca tela -->
                 <a href="#" onclick="showScreen('prod-create')">Propriedade</a>
                 <a href="#" onclick="showScreen('prod-cats')">Categorias</a>
             </div>
 
             <!-- MOVIMENTAÇÃO -->
-            <div class="menu-item" onclick="toggleSub('m2')">
+            <div class="menu-item" onclick="toggleSub('m2')"> <!-- Abre submenu m2 -->
                 <div class="label">
                     <div class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" height="48px" 
@@ -86,13 +81,13 @@
                 <div class="arrow">›</div>
             </div>
 
-            <div class="submenu" id="m2">
+            <div class="submenu" id="m2"> <!-- Submenu de movimentação -->
                 <a href="#" onclick="showScreen('profile')">Perfil</a>
                 <a href="#" onclick="showScreen('prefs')">Preferências</a>
             </div>
 
             <!-- RELATÓRIOS -->
-            <div class="menu-item" onclick="showScreen('reports')">
+            <div class="menu-item" onclick="showScreen('reports')"> <!-- Botão que abre a tela reports -->
                 <div class="label">
                     <div class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" height="48px" 
@@ -108,53 +103,66 @@
     </nav>
 
     <!-- BOTÃO SAIR -->
-    <button class="logout-btn" onclick="window.location.href='{% url "login" %}'">Sair</button>
+    <button class="logout-btn" onclick="window.location.href='{% url "login" %}'">Sair</button> <!-- Redireciona para a página de login -->
 
-    <div class="sidebar-footer">
-        <button class="toggle-btn" onclick="toggleSidebar()"></button>
+    <div class="sidebar-footer"> <!-- Rodapé da sidebar -->
+        <button class="toggle-btn" onclick="toggleSidebar()"></button> <!-- Botão para esconder/mostrar sidebar -->
     </div>
 
 </aside>
 
 <!-- MAIN -->
-<main class="main">
+<main class="main"> <!-- Conteúdo principal -->
 
     <!-- TOPBAR -->
-    <div class="topbar">
+    <div class="topbar"> <!-- Barra superior -->
 
-        <div class="left">
-            <button class="toggle-btn" onclick="toggleSidebar()">
+        <div class="left"> <!-- Lado esquerdo da topbar -->
+            <button class="toggle-btn" onclick="toggleSidebar()"> <!-- Botão hamburguer -->
                 <svg xmlns="http://www.w3.org/2000/svg" height="38px" 
                      viewBox="0 -1050 960 960" width="38px" fill="#000000">
-                     <path d="M140-254.62V-300h680v45.38H140Zm0-202.69v-45.38h680v45.38H140ZM140-660v-45.38h680V-660H140Z"/>
+                     <path d="M140-254.62V-300h680v45.38H140Zm0-202.69v-45.38h680v45.38H140ZM140-660v-45.38h680V-660H140Z"/> <!-- Ícone de menu -->
                 </svg>
-                
             </button>
-            <h2 id="screen-title">Início</h2>
+            <h2 id="screen-title">Início</h2> <!-- Título da tela atual -->
         </div>
 
-        <div class="user-info">
-            {% if usuario %}
+        <div class="user-info"> <!-- Área com dados do usuário -->
+            {% if usuario %} <!-- Se a variável 'usuario' existir -->
                   <svg xmlns="http://www.w3.org/2000/svg" height="65px" 
-                      viewBox="0 -960 960 960" width="24px" fill="#000000">
+                      viewBox="0 -960 960 960" width="24px" fill="#000000"> <!-- Ícone de usuário -->
                       <path d="M702-480 560-622l57-56 85 85 170-170 56 57-226 226Zm-342 0q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM40-160v-112q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v112H40Zm80-80h480v-32q0-11-5.5-20T580-306q-54-27-109-40.5T360-360q-56 0-111 13.5T140-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T440-640q0-33-23.5-56.5T360-720q-33 0-56.5 23.5T280-640q0 33 23.5 56.5T360-560Zm0 260Zm0-340Z"/>
                   </svg>
-                  <h3>{{ usuario }}</h3>
+                  <h3>{{ usuario }}</h3> <!-- Nome do usuário logado -->
             {% endif %}
         </div>
 
     </div>
 
     <!-- CONTEÚDO PRINCIPAL -->
-    <section id="screen" class="card">
-        <h3>Bem-vindo, {{ usuario }}</h3>
+    <section id="screen" class="card"> <!-- Conteúdo que muda dinamicamente -->
+        <h3>Bem-vindo, {{ usuario }}</h3> <!-- Mensagem de boas-vindas -->
         <p>Use o menu à esquerda para navegar.</p>
     </section>
 
 </main>
 
 <!-- JS -->
-<script src="{% static 'js/inicio.js' %}"></script>
+<script src="{% static 'js/inicio.js' %}"></script> <!-- Carrega o JavaScript principal da página -->
+
+{% if messages %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            {% for m in messages %}
+                {% if m.message == "abrir_lista" %}
+                    // Redireciona automaticamente para a página Grupo de Propriedades
+                    showScreen('prod-list');
+                {% endif %}
+            {% endfor %}
+        });
+    </script>
+{% endif %}
+
 
 </body>
 </html>

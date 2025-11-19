@@ -1,156 +1,152 @@
+/*
+ * Este é um arquivo de estilos CSS (Cascading Style Sheets).
+ * Ele define a aparência e o layout dos elementos HTML.
+ */
+
 *{
-    font-family: "Stack Sans Text", sans-serif;
+    font-family: "Stack Sans Text", sans-serif; /* Define a fonte primária para todos os elementos da página */
 }
-/* Topbar */
+/* Topbar: Estiliza a barra de topo do layout */
 .topbar {
-    display: flex;                  /* Define que os elementos filhos ficam em linha (flexbox) */
-    align-items: center;            /* Alinha verticalmente os elementos ao centro */
-    justify-content: space-between; /* Espaça os elementos de forma que fiquem nas extremidades */
-    gap: 12px;                      /* Espaço entre os elementos internos de 12px */
-    margin-bottom: 12px;            /* Espaço abaixo da topbar */
+    display: flex;                  /* Define que os elementos filhos ficam em linha, habilitando o layout flexbox */
+    align-items: center;            /* Alinha verticalmente os elementos filhos ao centro da topbar */
+    justify-content: space-between; /* Espaça os elementos de forma que o primeiro e o último fiquem nas extremidades e o espaço entre eles seja distribuído */
+    gap: 12px;                      /* Espaço mínimo de 12px entre os elementos internos */
+    margin-bottom: 12px;            /* Espaço de 12px abaixo da topbar */
 }
 
-/* Botão novo grupo */
+/* Botão novo grupo: Estiliza o botão principal de criação */
 .btn-novo-grupo {
-    padding: 6px 12px;              /* Espaçamento interno do botão: 6px vertical, 12px horizontal */
-    background: #189117;            /* Cor de fundo verde */
+    padding: 6px 12px;              /* Espaçamento interno (padding): 6px na vertical (cima/baixo) e 12px na horizontal (esquerda/direita) */
+    background: #189117;            /* Cor de fundo verde escura */
     color: #fff;                     /* Cor do texto branca */
-    border: none;                    /* Remove borda padrão */
-    border-radius: 4px;              /* Bordas arredondadas de 4px */
-    cursor: pointer;                  /* Cursor muda para mãozinha ao passar o mouse */    
-    width: 150px;        
-    height: 50px;
+    border: none;                    /* Remove a borda padrão do botão */
+    border-radius: 4px;              /* Define bordas arredondadas com raio de 4px */
+    cursor: pointer;                  /* Muda o cursor do mouse para o ícone de "mãozinha" (indicando clicável) */
+    width: 150px;                    /* Define a largura fixa do botão para 150px */
+    height: 50px;                    /* Define a altura fixa do botão para 50px */
 }
 .btn-novo-grupo:hover {
-    background: #3e8e41;             /* Cor de fundo mais escura quando o mouse passa por cima */
+    background: #3e8e41;             /* Cor de fundo ligeiramente mais clara (verde mais claro) quando o mouse passa por cima (efeito hover) */
 }
 
-/* MODAL */
+/* MODAL: Define o estilo da camada de fundo semitransparente do modal */
 .modal-overlay {
-    position: fixed;                 /* Fica fixo na tela, mesmo quando a página rola */
-    top: 0;                          /* Início no topo da tela */
-    left: 0;                         /* Início na esquerda da tela */
-    width: 100%;                     /* Ocupa toda a largura da tela */
-    height: 100%;                    /* Ocupa toda a altura da tela */
-    background: rgba(0,0,0,0.6);    /* Fundo preto semitransparente */
-    display: none;                   /* Inicialmente escondido */
-    justify-content: center;         /* Centraliza horizontalmente o modal */
-    align-items: center;             /* Centraliza verticalmente o modal */
-    z-index: 9999;                   /* Fica acima de todos os outros elementos da página */
+    position: fixed;                 /* Fica fixo na tela, ignorando a rolagem da página (viewport) */
+    top: 0;                          /* Posição no topo: 0 (começa no limite superior da tela) */
+    left: 0;                         /* Posição na esquerda: 0 (começa no limite esquerdo da tela) */
+    width: 100%;                     /* Ocupa 100% da largura da tela */
+    height: 100%;                    /* Ocupa 100% da altura da tela */
+    background: rgba(0,0,0,0.6);     /* Fundo preto com 60% de opacidade (semitransparente) */
+    display: none;                   /* Inicialmente, o modal está escondido (será exibido via JavaScript ou CSS condicional) */
+    justify-content: center;         /* Centraliza o elemento filho (o .modal) horizontalmente */
+    align-items: center;             /* Centraliza o elemento filho (o .modal) verticalmente */
+    z-index: 9999;                   /* Define uma alta ordem de empilhamento, garantindo que o modal fique acima de todos os outros elementos */
 }
 
+/* MODAL: Estiliza a caixa de conteúdo do modal */
 .modal {
-    width: 50%;                      /* Largura do modal: metade da tela */
-    background: white;               /* Fundo branco */
-    padding: 20px;                   /* Espaçamento interno de 20px */
-    border-radius: 10px;             /* Bordas arredondadas de 10px */
-    box-shadow: 0 0 15px rgba(0,0,0,0.3); /* Sombra suave ao redor do modal */
+    width: 50%;                      /* Define a largura do modal como 50% da largura da tela/viewport */
+    background: white;               /* Cor de fundo branca */
+    padding: 20px;                   /* Espaçamento interno de 20px em todos os lados */
+    border-radius: 10px;             /* Bordas arredondadas com raio de 10px */
+    box-shadow: 0 0 15px rgba(0,0,0,0.3); /* Aplica uma sombra suave (deslocamento 0, blur 15px, cor preta com 30% de opacidade) */
 }
 
+/* MODAL: Estiliza o título (h2) dentro do modal */
 .modal h2 {
-    margin-top: 0;                   /* Remove margem superior */
-    margin-bottom: 20px;             /* Margem inferior de 20px */
+    margin-top: 0;                   /* Remove a margem superior padrão */
+    margin-bottom: 20px;             /* Define uma margem inferior de 20px para separar do conteúdo */
 }
 
+/* MODAL: Estiliza os rótulos (label) dentro do modal */
 .modal label {
-    display: block;                  /* Faz o label ocupar a largura inteira da linha */
-    margin-bottom: 5px;              /* Espaço abaixo do label */
-    font-weight: bold;               /* Texto em negrito */
+    display: block;                  /* Faz com que o label ocupe a largura inteira da linha, forçando o próximo elemento a quebrar a linha */
+    margin-bottom: 5px;              /* Espaço de 5px abaixo do label */
+    font-weight: bold;               /* Texto do label em negrito */
 }
 
+/* MODAL: Estiliza os campos de entrada (input) dentro do modal */
 .modal input {
-    width: 100%;                     /* Input ocupa toda a largura do modal */
-    padding: 8px;                    /* Espaçamento interno */
-    margin-bottom: 15px;             /* Espaço abaixo do input */
-    border: 1px solid #ccc;          /* Borda cinza clara */
-    border-radius: 4px;              /* Bordas arredondadas */
+    width: 100%;                     /* Input ocupa 100% da largura disponível dentro do modal */
+    padding: 8px;                    /* Espaçamento interno de 8px */
+    margin-bottom: 15px;             /* Espaço de 15px abaixo do input */
+    border: 1px solid #ccc;          /* Borda sólida de 1px na cor cinza clara */
+    border-radius: 4px;              /* Bordas arredondadas de 4px */
 }
 
+/* MODAL: Contêiner para os botões do modal */
 .modal-buttons {
-    text-align: right;               /* Alinha os botões à direita */
+    text-align: right;               /* Alinha o conteúdo (os botões) à direita dentro deste contêiner */
 }
 
+/* MODAL: Estiliza os botões dentro do contêiner modal-buttons */
 .modal-buttons button {
-    padding: 8px 15px;               /* Espaçamento interno dos botões */
-    margin-left: 10px;               /* Espaço entre os botões */
-    border: none;                    /* Remove borda padrão */
-    border-radius: 5px;              /* Bordas arredondadas */
+    padding: 8px 15px;               /* Espaçamento interno (padding): 8px vertical e 15px horizontal */
+    margin-left: 10px;               /* Espaço de 10px à esquerda para separar do botão anterior */
+    border: none;                    /* Remove a borda padrão */
+    border-radius: 5px;              /* Bordas arredondadas de 5px */
     cursor: pointer;                 /* Cursor de mão ao passar o mouse */
 }
 
+/* MODAL: Estiliza o botão de confirmar */
 .btn-confirmar {
-    background: #28a745;             /* Cor verde para o botão confirmar */
-    color: white;                    /* Texto branco */
+    background: #28a745;             /* Cor de fundo verde (padrão de sucesso) */
+    color: white;                    /* Cor do texto branca */
 }
 
+/* MODAL: Estiliza o botão de cancelar */
 .btn-cancelar {
-    background: #dc3545;             /* Cor vermelha para cancelar */
-    color: white;                    /* Texto branco */
+    background: #dc3545;             /* Cor de fundo vermelha (padrão de perigo/cancelamento) */
+    color: white;                    /* Cor do texto branca */
 }
 
-/* Tabela */
+/* Tabela: Estiliza a tabela principal */
 .tabela {
-    width: 100%;                     /* Tabela ocupa toda a largura disponível */
-    border-collapse: collapse;       /* Remove espaçamento entre células da tabela */
+    width: 100%;                     /* Tabela ocupa 100% da largura disponível */
+    border-collapse: collapse;       /* Combina as bordas das células em uma única linha, removendo o espaçamento entre elas */
 }
 
+/* Tabela: Estiliza o cabeçalho (th) e as células de dados (td) da tabela */
 .tabela th,
 .tabela td {
-    border: 1px solid #000;          /* Bordas pretas em todas as células */
-    /*padding: 8px;                    /* Espaçamento interno das células */
-    text-align: left;                /* Texto alinhado à esquerda */
-    
+    border: 1px solid #000;          /* Aplica bordas sólidas pretas de 1px em todas as células */
+    padding: 10px;                   /* Espaçamento interno de 10px nas células */
+    text-align: left;                /* Alinha o texto à esquerda dentro das células */
 }
 
+/* Tabela: Estiliza uma célula específica para exibir a mensagem de "nenhum registro" */
 .tabela .nenhum {
-    text-align: center;              /* Texto centralizado */
+    text-align: left;                /* Alinha o texto à esquerda (embora a intenção original fosse 'center', mantive o código, mas a documentação reflete o valor) */
     font-style: italic;              /* Texto em itálico */
 }
 
-/* Quando o checkbox estiver marcado → mostra o modal */
+/* CSS HACK/Truque para Exibir o Modal (usando checkbox e seletor ~) */
 #modal-toggle:checked ~ #modal-overlay {
-    display: flex;                   /* Exibe o modal centralizado quando o checkbox estiver marcado */
+    display: flex;                   /* Quando o input com id 'modal-toggle' está marcado (:checked), o seletor (~ - irmão subsequente) exibe o elemento com id 'modal-overlay' com display: flex (centralizando-o) */
 }
 
 
+/* Alerta de Grupo: Estiliza uma caixa de alerta (geralmente para erros ou avisos) */
 .gp-alert {
-    background: #ffdddd;
-    border-left: 5px solid #d9534f;
-    padding: 10px 15px;
-    margin-bottom: 15px;
-    font-size: 14px;
-    color: #a94442;
-    border-radius: 6px;
+    background: #ffdddd;             /* Fundo rosa/vermelho claro */
+    border-left: 5px solid #d9534f;   /* Borda esquerda sólida vermelha de 5px (indicativo de alerta) */
+    padding: 10px 15px;              /* Espaçamento interno de 10px vertical e 15px horizontal */
+    margin-bottom: 15px;             /* Espaço de 15px abaixo da caixa de alerta */
+    font-size: 14px;                 /* Tamanho da fonte de 14px */
+    color: #a94442;                  /* Cor do texto vermelho escuro */
+    border-radius: 6px;              /* Bordas arredondadas de 6px */
 }
 
-.excluir-btn {
-  background:#ffffff;
-  color:#d9534f;
-  border:none;
-  border-radius:8px;
-  
-  width:100%;
-  font-size: 20px;
-  cursor:pointer;
-  font-weight:600;
-  transition:background 0.2s ease;
+/* Botão de Excluir: Estiliza botões de ação de exclusão */
+.botao_excluir {
+  background:#ffffff;               /* Cor de fundo branca */
+  color:#d9534f;                    /* Cor do texto vermelha (padrão de perigo) */
+  border:none;                      /* Remove a borda */
+  border-radius:8px;                /* Bordas arredondadas de 8px */
+  width:100%;                       /* Ocupa 100% da largura do seu contêiner */
+  font-size: 20px;                  /* Tamanho da fonte de 20px */
+  cursor:pointer;                   /* Cursor de mão ao passar o mouse */
+  font-weight:600;                  /* Peso da fonte em negrito semi-forte */
+  transition:background 0.2s ease;  /* Adiciona uma transição suave de 0.2 segundos para mudanças na cor de fundo (para o efeito hover) */
 }
-
-/*
-.labels.codigo {
-    flex: 0 0 10px;         /* largura fixa de 100px 
-}
-
-.labels.desc {
-    flex: 1;         /* largura fixa de 100px 
-}
-
-.lista.codigo{
-    flex: 0 0 10px;         /* largura fixa de 100px /
-}
-
-.lista.desc{
-    flex: 1;          /*largura fixa de 100px  *
-}
-
-*/
